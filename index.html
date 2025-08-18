@@ -1,212 +1,687 @@
-
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Saptarshi Samanta's Porfoio</title>
-  <meta name="description" content="Personal portfolio of Your Name: projects, notes, and contact." />
-  <meta name="author" content="Saptarshi Samanta" />
-  <style>
-    /* ===== Theme ===== */
-    :root{
-      --bg: #fffff8;                 /* warm white */
-      --ink: #111;                   /* near-black text */
-      --muted: #555;                 /* secondary text */
-      --link: #07c;                  /* calm blue links */
-      --link-visited: #551a8b;       /* classic visited */
-      --rule: #e6e4de;               /* hairline rules */
-      --sidebar-w: 16rem;            /* left nav width */
-      --max-measure: 70ch;           /* comfortable line length */
-    }
-    @media (prefers-color-scheme: dark){
-      :root{ --bg:#0e0e0e; --ink:#e6e6e6; --muted:#b3b3b3; --link:#7db0ff; --link-visited:#c39cff; --rule:#242424; }
-    }
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Saptarshi Samanta's Portfolio</title>
+    <meta name="description" content="Personal portfolio of Saptarshi Samanta: projects, notes, and contact." />
+    <meta name="author" content="Saptarshi Samanta" />
+    <style>
+        /* ===== Theme ===== */
+        :root{
+            --bg: #fffff8; /* warm white */
+            --ink: #111; /* near-black text */
+            --muted: #555; /* secondary text */
+            --link: #07c; /* calm blue links */
+            --link-visited: #551a8b; /* classic visited */
+            --rule: #e6e4de; /* hairline rules */
+            --sidebar-w: 16rem; /* left nav width */
+            --max-measure: 70ch; /* comfortable line length */
+        }
 
-    html{ font-size: 17px; }
-    body{
-      margin:0; color:var(--ink); background:var(--bg);
-      font-family: Charter, Constantia, "Palatino Linotype", Palatino, Georgia, serif;
-      line-height:1.65; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
-    }
+        @media (prefers-color-scheme: dark){
+            :root{
+                --bg:#0e0e0e;
+                --ink:#e6e6e6;
+                --muted:#b3b3b3;
+                --link:#7db0ff;
+                --link-visited:#c39cff;
+                --rule:#242424;
+            }
+        }
 
-    a{ color:var(--link); text-decoration:none; }
-    a:visited{ color:var(--link-visited); }
-    a:hover{ text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .15em; }
+        html{
+            font-size: 17px;
+        }
 
-    /* ===== Layout ===== */
-    .wrap{ display:grid; grid-template-columns: var(--sidebar-w) 1fr; min-height:100vh; }
+        body{
+            margin:0;
+            color:var(--ink);
+            background:var(--bg);
+            font-family: Charter, Constantia, "Palatino Linotype", Palatino, Georgia, serif;
+            line-height:1.65;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    /* Sidebar (left, fixed on wide screens) */
-    aside.site{
-      position:sticky; top:0; align-self:start; height:100vh; box-sizing:border-box;
-      border-right:1px solid var(--rule); padding:1.25rem 1rem; overflow:auto;
-    }
-    .brand{ font-variant: small-caps; letter-spacing:.5px; font-weight:700; font-size:1.1rem; }
-    .tagline{ color:var(--muted); margin-top:.25rem; font-size:.95rem; }
-    nav ul{ list-style:none; padding:0; margin:1rem 0 0; }
-    nav li{ margin:.15rem 0; }
-    nav a{ display:block; padding:.2rem 0; }
+        a{
+            color:var(--link);
+            text-decoration:none;
+        }
 
-    /* Main article column */
-    main{ padding:2rem min(6vw,3rem); }
-    article{ max-width: var(--max-measure); }
+        a:visited{
+            color:var(--link-visited);
+        }
 
-    h1,h2,h3{ font-weight:700; line-height:1.2; }
-    h1{ font-size:1.9rem; margin:0 0 .5rem; }
-    h2{ font-size:1.35rem; margin:2rem 0 .25rem; border-bottom:1px solid var(--rule); padding-bottom:.2rem; }
-    h3{ font-size:1.1rem; margin:1.2rem 0 .2rem; }
-    p{ margin:.85rem 0; }
-    .muted{ color:var(--muted); }
-    .small{ font-size:.95rem; }
-    hr{ border:0; border-top:1px solid var(--rule); margin:2rem 0; }
+        a:hover{
+            text-decoration: underline;
+            text-decoration-thickness: .06em;
+            text-underline-offset: .15em;
+        }
 
-    /* Sidenotes / marginalia (right margin on wide screens) */
-    .marginalia{ float:right; clear:right; margin-right:-45%; width:40%;
-      margin-top:.2rem; margin-bottom:.2rem; font-size:.9rem; color:var(--muted);
-    }
-    @media (max-width: 1200px){ .marginalia{ float:none; margin: .5rem 0 0; width:auto; } }
+        /* ===== Layout ===== */
+        .wrap{
+            display:grid;
+            grid-template-columns: var(--sidebar-w) 1fr;
+            min-height:100vh;
+        }
 
-    /* Project list is just text-first, link-heavy */
-    .projects dl{ margin:0; }
-    .projects dt{ font-weight:600; }
-    .projects dd{ margin: 0 0 .9rem 0; color:var(--muted); }
+        /* Sidebar (left, fixed on wide screens) */
+        aside.site{
+            position:sticky;
+            top:0;
+            align-self:start;
+            height:100vh;
+            box-sizing:border-box;
+            border-right:1px solid var(--rule);
+            padding:1.25rem 1rem;
+            overflow:auto;
+        }
 
-    /* Footer */
-    footer{ border-top:1px solid var(--rule); margin-top:3rem; padding-top:1rem; color:var(--muted); }
+        .brand{
+            font-variant: small-caps;
+            letter-spacing:.5px;
+            font-weight:700;
+            font-size:1.1rem;
+        }
 
-    /* Mobile: collapse sidebar to top */
-    @media (max-width: 880px){
-      .wrap{ grid-template-columns: 1fr; }
-      aside.site{ position:relative; height:auto; border-right:0; border-bottom:1px solid var(--rule); }
-    }
+        .tagline{
+            color:var(--muted);
+            margin-top:.25rem;
+            font-size:.95rem;
+        }
 
-    /* Utilities */
-    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
-    .caps{ font-variant: small-caps; letter-spacing: .5px; }
-    code,kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:.95em; }
-  </style>
+        nav ul{
+            list-style:none;
+            padding:0;
+            margin:1rem 0 0;
+        }
+
+        nav li{
+            margin:.15rem 0;
+        }
+
+        nav a{
+            display:block;
+            padding:.2rem 0;
+            cursor: pointer;
+        }
+
+        nav a.active{
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        /* Main article column */
+        main{
+            padding:2rem min(6vw,3rem);
+        }
+
+        article{
+            max-width: var(--max-measure);
+        }
+
+        h1,h2,h3{
+            font-weight:700;
+            line-height:1.2;
+        }
+
+        h1{
+            font-size:1.9rem;
+            margin:0 0 .5rem;
+        }
+
+        h2{
+            font-size:1.35rem;
+            margin:2rem 0 .25rem;
+            border-bottom:1px solid var(--rule);
+            padding-bottom:.2rem;
+        }
+
+        h3{
+            font-size:1.1rem;
+            margin:1.2rem 0 .2rem;
+        }
+
+        p{
+            margin:.85rem 0;
+        }
+
+        .muted{
+            color:var(--muted);
+        }
+
+        .small{
+            font-size:.95rem;
+        }
+
+        hr{
+            border:0;
+            border-top:1px solid var(--rule);
+            margin:2rem 0;
+        }
+
+        /* Sidenotes / marginalia (right margin on wide screens) */
+        .marginalia{
+            float:right;
+            clear:right;
+            margin-right:-45%;
+            width:40%;
+            margin-top:.2rem;
+            margin-bottom:.2rem;
+            font-size:.9rem;
+            color:var(--muted);
+        }
+
+        @media (max-width: 1200px){
+            .marginalia{
+                float:none;
+                margin: .5rem 0 0;
+                width:auto;
+            }
+        }
+
+        /* Project list is just text-first, link-heavy */
+        .projects dl{
+            margin:0;
+        }
+
+        .projects dt{
+            font-weight:600;
+        }
+
+        .projects dd{
+            margin: 0 0 .9rem 0;
+            color:var(--muted);
+        }
+
+        /* Blog styles */
+        .blog-post{
+            border-bottom: 1px solid var(--rule);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .blog-post:last-child{
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .blog-meta{
+            color: var(--muted);
+            font-size: .9rem;
+            margin-bottom: .5rem;
+        }
+
+        .blog-excerpt{
+            margin: .75rem 0;
+        }
+
+        .read-more{
+            font-size: .9rem;
+            font-weight: 500;
+        }
+
+        .blog-tags{
+            margin-top: .75rem;
+        }
+
+        .tag{
+            display: inline-block;
+            background: var(--rule);
+            color: var(--muted);
+            padding: .15rem .4rem;
+            border-radius: .2rem;
+            font-size: .8rem;
+            margin-right: .3rem;
+            margin-bottom: .3rem;
+        }
+
+        .back-link{
+            margin-bottom: 1.5rem;
+            font-size: .9rem;
+        }
+
+        /* Navigation states */
+        .page{
+            display: none;
+        }
+
+        .page.active{
+            display: block;
+        }
+
+        /* Footer */
+        footer{
+            border-top:1px solid var(--rule);
+            margin-top:3rem;
+            padding-top:1rem;
+            color:var(--muted);
+        }
+
+        /* Mobile: collapse sidebar to top */
+        @media (max-width: 880px){
+            .wrap{
+                grid-template-columns: 1fr;
+            }
+
+            aside.site{
+                position:relative;
+                height:auto;
+                border-right:0;
+                border-bottom:1px solid var(--rule);
+            }
+        }
+
+        /* Utilities */
+        .sr-only {
+            position:absolute;
+            width:1px;
+            height:1px;
+            padding:0;
+            margin:-1px;
+            overflow:hidden;
+            clip:rect(0,0,0,0);
+            border:0;
+        }
+
+        .caps{
+            font-variant: small-caps;
+            letter-spacing: .5px;
+        }
+
+        code,kbd{
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            font-size:.95em;
+            background: var(--rule);
+            padding: .1em .3em;
+            border-radius: .2em;
+        }
+
+        pre{
+            background: var(--rule);
+            padding: 1rem;
+            border-radius: .3rem;
+            overflow-x: auto;
+            font-size: .9rem;
+        }
+
+        pre code{
+            background: none;
+            padding: 0;
+        }
+
+        blockquote{
+            border-left: 3px solid var(--rule);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--muted);
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-  <a id="top" class="sr-only">Top</a>
-  <div class="wrap">
-    <!-- Left sidebar (title, nav, metadata) -->
-    <aside class="site" aria-label="Site">
-      <div class="brand">Saptarshi Samanta</div>
-      <div class="tagline">GTM</div>
-      <nav aria-label="Sections">
-        <ul>
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-      <hr/>
-      <div class="small">
-        <div><span class="caps">GitHub</span>: <a id="gh" href="https://github.com/saptarshisama">@saptarshisama</a></div>
-        <div><span class="caps">LinkedIn</span>: <a id="li" href="https://www.linkedin.com/in/saptarshisama/">My LinkedIn</a></div>
-        <div><span class="caps">Email</span>: <a id="em" href="saptarshi.samanta@hackerrank.com">saptarshi.samanta@hackerrank.com</a></div>
-        <div class="muted" id="updated">Updated: <time></time></div>
-      </div>
-    </aside>
+    <a id="top" class="sr-only">Top</a>
+    <div class="wrap">
+        <!-- Left sidebar (title, nav, metadata) -->
+        <aside class="site" aria-label="Site">
+            <div class="brand">Saptarshi Samanta</div>
+            <div class="tagline">GTM</div>
+            <nav aria-label="Sections">
+                <ul>
+                    <li><a href="#about" class="nav-link active">About</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#blog" class="nav-link">Blog</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <hr/>
+            <div class="small">
+                <div><span class="caps">GitHub</span>: <a id="gh" href="https://github.com/saptarshisama">@saptarshisama</a></div>
+                <div><span class="caps">LinkedIn</span>: <a id="li" href="https://www.linkedin.com/in/saptarshisama/">My LinkedIn</a></div>
+                <div><span class="caps">Email</span>: <a id="em" href="mailto:saptarshi.samanta@hackerrank.com">saptarshi.samanta@hackerrank.com</a></div>
+                <div class="muted" id="updated">Updated: <time></time></div>
+            </div>
+        </aside>
 
-    <!-- Main column -->
-    <main>
-      <article>
-        <header>
-          <h1>Your Name</h1>
-          <p class="muted">I want to see what all I can make without knowing actually how to code</p>
-        </header>
+        <!-- Main column -->
+        <main>
+            <!-- About Page -->
+            <article class="page active" id="about-page">
+                <header>
+                    <h1>Saptarshi Samanta</h1>
+                    <p class="muted">I want to see what all I can make without knowing actually how to code</p>
+                </header>
+                <section>
+                    <h2>About</h2>
+                    <p>
+                        Engineer at <em>Company</em>. Interests: programming languages, tooling, data, UX. I prefer readable code, small binaries, and benchmarks where they matter.
+                        <span class="marginalia">Résumé: <a id="resume" href="resume.pdf">PDF</a>. Also see <a id="gh2" href="#">GitHub</a>.</span>
+                    </p>
+                </section>
+            </article>
 
-        <section id="about">
-          <h2>About</h2>
-          <p>
-            Engineer at <em>Company</em>. Interests: programming languages, tooling, data, UX. I prefer readable code, small binaries, and benchmarks where they matter.
-            <span class="marginalia">Résumé: <a id="resume" href="resume.pdf">PDF</a>. Also see <a id="gh2" href="#">GitHub</a>.</span>
-          </p>
-        </section>
+            <!-- Projects Page -->
+            <article class="page" id="projects-page">
+                <header>
+                    <h1>Projects</h1>
+                    <p class="muted small">A selection; see repositories for full list.</p>
+                </header>
+                <section class="projects">
+                    <dl id="plist"><!-- populated by JS --></dl>
+                </section>
+            </article>
 
-        <section id="projects" class="projects">
-          <h2>Projects</h2>
-          <p class="muted small">A selection; see repositories for full list.</p>
-          <dl id="plist"><!-- populated by JS --></dl>
-        </section>
+            <!-- Experience Page -->
+            <article class="page" id="experience-page">
+                <header>
+                    <h1>Experience</h1>
+                </header>
+                <section>
+                    <ul id="exp" class="small"><!-- populated by JS --></ul>
+                </section>
+            </article>
 
-        <section id="experience">
-          <h2>Experience</h2>
-          <ul id="exp" class="small"><!-- populated by JS --></ul>
-        </section>
+            <!-- Blog Page -->
+            <article class="page" id="blog-page">
+                <header>
+                    <h1>Blog</h1>
+                    <p class="muted">Thoughts on technology, programming, and building things.</p>
+                </header>
+                <section id="blog-list">
+                    <!-- Blog posts will be populated by JS -->
+                </section>
+            </article>
 
-        <section id="contact">
-          <h2>Contact</h2>
-          <p>Email <a id="em2" href="mailto:you@domain.com">saptarshi.samanta@zohomail.in</a>. I read everything.</p>
-        </section>
+            <!-- Individual Blog Post -->
+            <article class="page" id="blog-post-page">
+                <div class="back-link">
+                    <a href="#blog" class="nav-link">← Back to Blog</a>
+                </div>
+                <div id="blog-post-content">
+                    <!-- Individual post content will be populated by JS -->
+                </div>
+            </article>
 
-        <footer>
-          <p>© <span id="year"></span> Your Name · <a href="#top">Back to top</a></p>
-        </footer>
-      </article>
-    </main>
-  </div>
+            <!-- Contact Page -->
+            <article class="page" id="contact-page">
+                <header>
+                    <h1>Contact</h1>
+                </header>
+                <section>
+                    <p>Email <a id="em2" href="mailto:saptarshi.samanta@zohomail.in">saptarshi.samanta@zohomail.in</a>. I read everything.</p>
+                </section>
+            </article>
 
-  <script>
-    // Minimal data config (edit this)
-    const SITE = {
-      name: "Saptarshi Samanta",
-      email: "saptarshi.samanta@zohomail.in",
-      github: "saptarshisama",
-      linkedin: "your-linkedin",
-      resume: "resume.pdf",
-    };
+            <footer>
+                <p>© <span id="year"></span> Saptarshi Samanta · <a href="#top">Back to top</a></p>
+            </footer>
+        </main>
+    </div>
 
-    const PROJECTS = [
-      { title: "Project Alpha", link: "https://github.com/yourusername/project-alpha", extra: "Live demo", extraLink: "https://yourusername.github.io/project-alpha/", desc: "TypeScript/React. A fast, accessible UI toolkit." },
-      { title: "DataViz Toolkit", link: "https://github.com/yourusername/dataviz-toolkit", desc: "Python utilities for quick, reproducible charts." },
-      { title: "Tiny CLI", link: "https://github.com/yourusername/tiny-cli", desc: "Go-based command-line helper; single static binary." },
-      { title: "Landing Template", link: "https://github.com/yourusername/landing-template", extra: "Preview", extraLink: "https://yourusername.github.io/landing-template/", desc: "No-framework HTML/CSS starter focused on a11y." },
-    ];
+    <script>
+        // Minimal data config (edit this)
+        const SITE = {
+            name: "Saptarshi Samanta",
+            email: "saptarshi.samanta@zohomail.in",
+            github: "saptarshisama",
+            linkedin: "saptarshisama",
+            resume: "resume.pdf",
+        };
 
-    const EXPERIENCE = [
-      { org: "Company A", role: "Senior Software Engineer", when: "2023–Present" },
-      { org: "Company B", role: "Software Engineer", when: "2020–2023" },
-    ];
+        const PROJECTS = [
+            {
+                title: "Project Alpha",
+                link: "https://github.com/yourusername/project-alpha",
+                extra: "Live demo",
+                extraLink: "https://yourusername.github.io/project-alpha/",
+                desc: "TypeScript/React. A fast, accessible UI toolkit."
+            },
+            {
+                title: "DataViz Toolkit",
+                link: "https://github.com/yourusername/dataviz-toolkit",
+                desc: "Python utilities for quick, reproducible charts."
+            },
+            {
+                title: "Tiny CLI",
+                link: "https://github.com/yourusername/tiny-cli",
+                desc: "Go-based command-line helper; single static binary."
+            },
+            {
+                title: "Landing Template",
+                link: "https://github.com/yourusername/landing-template",
+                extra: "Preview",
+                extraLink: "https://yourusername.github.io/landing-template/",
+                desc: "No-framework HTML/CSS starter focused on a11y."
+            },
+        ];
 
-    // Bind site metadata
-    document.title = `${SITE.name} — Portfolio`;
-    document.querySelector('.brand').textContent = SITE.name;
-    document.getElementById('gh').href = `https://github.com/${SITE.github}`;
-    document.getElementById('gh').textContent = `@${SITE.github}`;
-    document.getElementById('gh2').href = `https://github.com/${SITE.github}`;
-    document.getElementById('li').href = `https://www.linkedin.com/in/${SITE.linkedin}/`;
-    document.getElementById('em').href = `mailto:${SITE.email}`;
-    document.getElementById('em').textContent = SITE.email;
-    document.getElementById('em2').href = `mailto:${SITE.email}`;
-    document.getElementById('em2').textContent = SITE.email;
-    document.getElementById('resume').href = SITE.resume;
+        const EXPERIENCE = [
+            { org: "Company A", role: "Senior Software Engineer", when: "2023–Present" },
+            { org: "Company B", role: "Software Engineer", when: "2020–2023" },
+        ];
 
-    // Updated time
-    const t = new Date();
-    document.querySelector('#updated time').textContent = t.toISOString().slice(0,10);
-    document.getElementById('year').textContent = t.getFullYear();
+        // Blog posts data
+        const BLOG_POSTS = [
+            {
+                id: 1,
+                title: "Building Without Frameworks: My Journey",
+                date: "2024-08-15",
+                excerpt: "Why I chose to build my portfolio with vanilla HTML, CSS, and JavaScript, and what I learned along the way.",
+                content: `
+                    <p>When I started building my portfolio, I had a choice: use a modern framework like React or Next.js, or go back to basics with vanilla technologies. I chose the latter, and here's why.</p>
+                    
+                    <h3>The Simplicity Advantage</h3>
+                    <p>There's something refreshing about writing plain HTML, CSS, and JavaScript. No build steps, no dependencies, no complex tooling. Just open a text editor and start creating.</p>
+                    
+                    <blockquote>
+                        "Simplicity is the ultimate sophistication." — Leonardo da Vinci
+                    </blockquote>
+                    
+                    <p>This approach taught me to really understand the fundamentals. When you can't reach for a library, you have to solve problems creatively with the tools at hand.</p>
+                    
+                    <h3>Performance Benefits</h3>
+                    <p>The result is a blazingly fast website. No JavaScript bundles to download, no hydration delays. Just clean, semantic HTML that loads instantly.</p>
+                    
+                    <pre><code>// Simple navigation without a router
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId + '-page').classList.add('active');
+}</code></pre>
+                    
+                    <p>Sometimes the old ways are the best ways.</p>
+                `,
+                tags: ["web development", "vanilla js", "performance"]
+            },
+            {
+                id: 2,
+                title: "CSS Grid vs Flexbox: When to Use What",
+                date: "2024-08-10",
+                excerpt: "A practical guide to choosing between CSS Grid and Flexbox for different layout scenarios.",
+                content: `
+                    <p>CSS Grid and Flexbox are both powerful layout tools, but they serve different purposes. Here's when to use each one.</p>
+                    
+                    <h3>Use Flexbox for One-Dimensional Layouts</h3>
+                    <p>Flexbox excels at distributing space along a single axis. Perfect for navigation bars, button groups, or centering content.</p>
+                    
+                    <pre><code>.nav-items {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}</code></pre>
+                    
+                    <h3>Use CSS Grid for Two-Dimensional Layouts</h3>
+                    <p>Grid is your go-to for complex layouts that need both rows and columns. Like the overall page structure of this portfolio.</p>
+                    
+                    <pre><code>.wrap {
+    display: grid;
+    grid-template-columns: 16rem 1fr;
+    min-height: 100vh;
+}</code></pre>
+                    
+                    <h3>They Work Great Together</h3>
+                    <p>Don't think of them as competing technologies. Use Grid for the overall layout structure, then use Flexbox for component-level alignment and distribution.</p>
+                `,
+                tags: ["css", "layout", "flexbox", "grid"]
+            },
+            {
+                id: 3,
+                title: "The Art of Readable Code",
+                date: "2024-08-05",
+                excerpt: "Writing code that humans can understand is just as important as making it work. Here are my principles for readable code.",
+                content: `
+                    <p>Code is written once but read many times. Here's how to make your future self (and your teammates) thank you.</p>
+                    
+                    <h3>Choose Descriptive Names</h3>
+                    <p>Variable and function names should tell a story. Compare these two approaches:</p>
+                    
+                    <pre><code>// Unclear
+function calc(d, r) {
+    return d * r * 0.01;
+}
 
-    // Render project list
-    const dl = document.getElementById('plist');
-    PROJECTS.forEach(p => {
-      const dt = document.createElement('dt');
-      dt.innerHTML = `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>` + (p.extra ? ` · <a href="${p.extraLink}" target="_blank" rel="noopener">${p.extra}</a>` : '');
-      const dd = document.createElement('dd');
-      dd.textContent = p.desc;
-      dl.append(dt, dd);
-    });
+// Clear
+function calculateDiscountAmount(price, discountRate) {
+    return price * discountRate * 0.01;
+}</code></pre>
+                    
+                    <h3>Write Self-Documenting Code</h3>
+                    <p>Good code explains itself. Comments should explain <em>why</em>, not <em>what</em>.</p>
+                    
+                    <h3>Keep Functions Small and Focused</h3>
+                    <p>A function should do one thing and do it well. If you need "and" to describe what your function does, it's probably doing too much.</p>
+                    
+                    <p>Remember: Code is for humans first, computers second.</p>
+                `,
+                tags: ["programming", "best practices", "clean code"]
+            }
+        ];
 
-    // Render experience
-    const ul = document.getElementById('exp');
-    EXPERIENCE.forEach(j => {
-      const li = document.createElement('li');
-      li.textContent = `${j.role} — ${j.org} (${j.when})`;
-      ul.appendChild(li);
-    });
-  </script>
+        // Navigation system
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const target = link.getAttribute('href').substring(1);
+                    
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Show target page
+                    showPage(target);
+                });
+            });
+        }
+
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page
+            const targetPage = document.getElementById(pageId + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+        }
+
+        function showBlogPost(postId) {
+            const post = BLOG_POSTS.find(p => p.id === parseInt(postId));
+            if (!post) return;
+
+            const contentDiv = document.getElementById('blog-post-content');
+            contentDiv.innerHTML = `
+                <header>
+                    <h1>${post.title}</h1>
+                    <div class="blog-meta">
+                        <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}</time>
+                    </div>
+                </header>
+                <div class="blog-content">
+                    ${post.content}
+                </div>
+                <div class="blog-tags">
+                    ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+            `;
+
+            showPage('blog-post');
+        }
+
+        function renderBlogList() {
+            const blogList = document.getElementById('blog-list');
+            const sortedPosts = BLOG_POSTS.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            blogList.innerHTML = sortedPosts.map(post => `
+                <div class="blog-post">
+                    <h3><a href="#" onclick="showBlogPost(${post.id}); return false;">${post.title}</a></h3>
+                    <div class="blog-meta">
+                        <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}</time>
+                    </div>
+                    <div class="blog-excerpt">${post.excerpt}</div>
+                    <a href="#" class="read-more" onclick="showBlogPost(${post.id}); return false;">Read more →</a>
+                    <div class="blog-tags">
+                        ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Bind site metadata
+        document.title = `${SITE.name} — Portfolio`;
+        document.querySelector('.brand').textContent = SITE.name;
+        document.getElementById('gh').href = `https://github.com/${SITE.github}`;
+        document.getElementById('gh').textContent = `@${SITE.github}`;
+        document.getElementById('gh2').href = `https://github.com/${SITE.github}`;
+        document.getElementById('li').href = `https://www.linkedin.com/in/${SITE.linkedin}/`;
+        document.getElementById('em').href = `mailto:${SITE.email}`;
+        document.getElementById('em').textContent = SITE.email;
+        document.getElementById('em2').href = `mailto:${SITE.email}`;
+        document.getElementById('em2').textContent = SITE.email;
+        document.getElementById('resume').href = SITE.resume;
+
+        // Updated time
+        const t = new Date();
+        document.querySelector('#updated time').textContent = t.toISOString().slice(0,10);
+        document.getElementById('year').textContent = t.getFullYear();
+
+        // Render project list
+        const dl = document.getElementById('plist');
+        PROJECTS.forEach(p => {
+            const dt = document.createElement('dt');
+            dt.innerHTML = `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>` +
+                (p.extra ? ` · <a href="${p.extraLink}" target="_blank" rel="noopener">${p.extra}</a>` : '');
+            const dd = document.createElement('dd');
+            dd.textContent = p.desc;
+            dl.append(dt, dd);
+        });
+
+        // Render experience
+        const ul = document.getElementById('exp');
+        EXPERIENCE.forEach(j => {
+            const li = document.createElement('li');
+            li.textContent = `${j.role} — ${j.org} (${j.when})`;
+            ul.appendChild(li);
+        });
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation();
+            renderBlogList();
+        });
+    </script>
 </body>
 </html>
