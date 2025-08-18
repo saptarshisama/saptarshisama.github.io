@@ -806,4 +806,158 @@
                 content: `<p>When I started building my portfolio, I had a choice: use a modern framework like React or Next.js, or go back to basics with vanilla technologies. I chose the latter, and here's why.</p>
                          <h3>The Simplicity Advantage</h3>
                          <p>There's something refreshing about writing plain HTML, CSS, and JavaScript. No build steps, no dependencies, no complex tooling. Just open a text editor and start creating.</p>
-                         <blockquote>"Simplicity is the ultimate sophistication." — Leonardo da V
+                         <blockquote>"Simplicity is the ultimate sophistication." — Leonardo da Vinci</blockquote>
+                         <p>This approach taught me to really understand the fundamentals. When you can't reach for a library, you have to solve problems creatively with the tools at hand.</p>
+                         <h3>Performance Benefits</h3>
+                         <p>The result is a blazingly fast website. No JavaScript bundles to download, no hydration delays. Just clean, semantic HTML that loads instantly.</p>
+                         <pre><code>// Simple navigation without a router
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId + '-page').classList.add('active');
+}</code></pre>
+                         <p>Sometimes the old ways are the best ways.</p>`,
+                tags: ["web development", "vanilla js", "performance"]
+            },
+            {
+                id: 2,
+                title: "CSS Grid vs Flexbox: When to Use What",
+                date: "2024-08-10",
+                excerpt: "A practical guide to choosing between CSS Grid and Flexbox for different layout scenarios.",
+                content: `<p>CSS Grid and Flexbox are both powerful layout tools, but they serve different purposes. Here's when to use each one.</p>
+                         <h3>Use Flexbox for One-Dimensional Layouts</h3>
+                         <p>Flexbox excels at distributing space along a single axis. Perfect for navigation bars, button groups, or centering content.</p>
+                         <pre><code>.nav-items {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}</code></pre>
+                         <h3>Use CSS Grid for Two-Dimensional Layouts</h3>
+                         <p>Grid is your go-to for complex layouts that need both rows and columns. Like the overall page structure of this portfolio.</p>
+                         <pre><code>.container {
+    display: grid;
+    grid-template-columns: 1fr 70ch 320px;
+    gap: 3rem;
+}</code></pre>
+                         <h3>They Work Great Together</h3>
+                         <p>Don't think of them as competing technologies. Use Grid for the overall layout structure, then use Flexbox for component-level alignment and distribution.</p>`,
+                tags: ["css", "layout", "flexbox", "grid"]
+            },
+            {
+                id: 3,
+                title: "The Art of Readable Code",
+                date: "2024-08-05",
+                excerpt: "Writing code that humans can understand is just as important as making it work. Here are my principles for readable code.",
+                content: `<p>Code is written once but read many times. Here's how to make your future self (and your teammates) thank you.</p>
+                         <h3>Choose Descriptive Names</h3>
+                         <p>Variable and function names should tell a story. Compare these two approaches:</p>
+                         <pre><code>// Unclear
+function calc(d, r) {
+    return d * r * 0.01;
+}
+
+// Clear
+function calculateDiscountAmount(price, discountRate) {
+    return price * discountRate * 0.01;
+}</code></pre>
+                         <h3>Write Self-Documenting Code</h3>
+                         <p>Good code explains itself. Comments should explain <em>why</em>, not <em>what</em>.</p>
+                         <h3>Keep Functions Small and Focused</h3>
+                         <p>A function should do one thing and do it well. If you need "and" to describe what your function does, it's probably doing too much.</p>
+                         <p>Remember: Code is for humans first, computers second.</p>`,
+                tags: ["programming", "best practices", "clean code"]
+            }
+        ];
+
+        function showBlogPost(postId) {
+            const post = BLOG_POSTS.find(p => p.id === parseInt(postId));
+            if (!post) return;
+            
+            const contentDiv = document.getElementById('blog-post-content');
+            contentDiv.innerHTML = `<header>
+                <h1>${post.title}</h1>
+                <div class="blog-meta">
+                    <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long', 
+                        day: 'numeric'
+                    })}</time>
+                </div>
+            </header>
+            <div class="blog-content">
+                ${post.content}
+            </div>
+            <div class="blog-tags">
+                ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>`;
+            
+            showPage('blog-post');
+        }
+
+        function renderBlogList() {
+            const blogList = document.getElementById('blog-list');
+            const sortedPosts = BLOG_POSTS.sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            blogList.innerHTML = sortedPosts.map(post => `
+                <div class="blog-post">
+                    <h3><a href="#" onclick="showBlogPost(${post.id}); return false;">${post.title}</a></h3>
+                    <div class="blog-meta">
+                        <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })}</time>
+                    </div>
+                    <div class="blog-excerpt">${post.excerpt}</div>
+                    <a href="#" class="read-more" onclick="showBlogPost(${post.id}); return false;">Read more →</a>
+                    <div class="blog-tags">
+                        ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Dark mode support for Twitter widget
+        function updateTwitterTheme() {
+            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const twitterTimeline = document.querySelector('.twitter-timeline');
+            if (twitterTimeline) {
+                twitterTimeline.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            }
+        }
+
+        // Bind site metadata
+        document.title = `${SITE.name} — Portfolio`;
+        document.querySelector('.brand').textContent = SITE.name;
+        document.getElementById('gh').href = `https://github.com/${SITE.github}`;
+        document.getElementById('gh').textContent = `@${SITE.github}`;
+        document.getElementById('gh2').href = `https://github.com/${SITE.github}`;
+        document.getElementById('li').href = `https://www.linkedin.com/in/${SITE.linkedin}/`;
+        document.getElementById('em').href = `mailto:${SITE.email}`;
+        document.getElementById('em').textContent = SITE.email;
+        document.getElementById('em2').href = `mailto:${SITE.email}`;
+        document.getElementById('em2').textContent = SITE.email;
+        document.getElementById('resume').href = SITE.resume;
+
+        // Updated time
+        const t = new Date();
+        document.querySelector('#updated time').textContent = t.toISOString().slice(0,10);
+        document.getElementById('year').textContent = t.getFullYear();
+
+        // Render project list
+        const dl = document.getElementById('plist');
+        PROJECTS.forEach(p => {
+            const dt = document.createElement('dt');
+            dt.innerHTML = `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>` +
+                          (p.extra ? ` · <a href="${p.extraLink}" target="_blank" rel="noopener">${p.extra}</a>` : '');
+            const dd = document.createElement('dd');
+            dd.textContent = p.desc;
+            dl.append(dt, dd);
+        });
+
+        // Render experience
+        const ul = document.getElementById('exp');
+        EXPERIENCE.forEach(j => {
+            const li = document.createElement('li');
+            li.textContent = `${j.role} — ${j.org} (${j.when})`;
+            ul.appendChild(li);
+        });
