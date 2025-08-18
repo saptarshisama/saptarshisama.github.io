@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Saptarshi Samanta — Portfolio</title>
+  <title>Saptarshi Samanta's Portfolio</title>
   <meta name="description" content="Personal portfolio of Saptarshi Samanta: projects, notes, and contact." />
   <meta name="author" content="Saptarshi Samanta" />
+
   <style>
     /* ===== Theme ===== */
     :root{
-      --bg: #fffff8; /* warm white */
-      --ink: #111; /* near-black text */
-      --muted: #555; /* secondary text */
-      --link: #07c; /* calm blue links */
-      --link-visited: #551a8b; /* classic visited */
-      --rule: #e6e4de; /* hairline rules */
-      --max-measure: 70ch; /* comfortable line length */
-      --twitter-width: 320px; /* Twitter feed width */
+      --bg: #fffff8;
+      --ink: #111;
+      --muted: #555;
+      --link: #07c;
+      --link-visited: #551a8b;
+      --rule: #e6e4de;
+      --max-measure: 70ch;
     }
     @media (prefers-color-scheme: dark){
       :root{
@@ -28,523 +28,293 @@
         --rule:#242424;
       }
     }
+
     html{ font-size: 17px; }
-    body{ margin:0; color:var(--ink); background:var(--bg); font-family: Charter, Constantia, "Palatino Linotype", Palatino, Georgia, serif; line-height:1.65; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+    body{
+      margin:0;
+      color:var(--ink);
+      background:var(--bg);
+      font-family: Charter, Constantia, "Palatino Linotype", Palatino, Georgia, serif;
+      line-height:1.65;
+    }
     a{ color:var(--link); text-decoration:none; }
     a:visited{ color:var(--link-visited); }
-    a:hover{ text-decoration: underline; text-decoration-thickness: .06em; text-underline-offset: .15em; }
+    a:hover{ text-decoration: underline; }
 
-    /* ===== Centered Layout ===== */
-    .container{ max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: 1fr var(--max-measure) var(--twitter-width); gap: 3rem; min-height: 100vh; }
+    /* ===== Layout ===== */
+    .container{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 3rem;
+      min-height: 100vh;
+    }
 
-    /* Left sidebar - now in center-left */
-    aside.site{ padding: 2rem 0; position: sticky; top: 2rem; align-self: start; height: fit-content; }
-    .brand{ font-variant: small-caps; letter-spacing:.5px; font-weight:700; font-size:1.3rem; margin-bottom: .5rem; }
+    /* Sidebar */
+    aside.site{
+      padding: 2rem 0;
+      position: sticky;
+      top: 2rem;
+      align-self: start;
+      height: fit-content;
+    }
+    .brand{ font-variant: small-caps; font-weight:700; font-size:1.3rem; margin-bottom: .5rem; }
     .tagline{ color:var(--muted); margin-bottom: 2rem; font-size:.95rem; }
     nav ul{ list-style:none; padding:0; margin: 0 0 2rem 0; }
     nav li{ margin:.4rem 0; }
-    nav a{ display:block; padding:.3rem 0; cursor: pointer; font-size: 1rem; }
+    nav a{ display:block; padding:.3rem 0; font-size: 1rem; }
     nav a.active{ font-weight: 600; color: var(--ink); }
     .sidebar-meta{ border-top: 1px solid var(--rule); padding-top: 1rem; font-size: .9rem; }
     .sidebar-meta > div{ margin: .4rem 0; }
 
-    /* Main content - center column */
+    /* Main content */
     main{ padding: 2rem 0; }
-    article{ width: 100%; }
-
-    /* Twitter sidebar - right column */
-    .twitter-sidebar{ padding: 2rem 0; position: sticky; top: 2rem; align-self: start; height: fit-content; }
-    .twitter-feed{ border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; background: var(--bg); }
-    .twitter-header{ padding: 1rem; border-bottom: 1px solid var(--rule); font-weight: 600; font-size: .9rem; color: var(--muted); text-align: center; }
-
+    article{ width: 100%; max-width: var(--max-measure); margin: 0 auto; }
     h1,h2,h3{ font-weight:700; line-height:1.2; }
     h1{ font-size:2.2rem; margin:0 0 .5rem; }
     h2{ font-size:1.5rem; margin:2rem 0 .5rem; border-bottom:1px solid var(--rule); padding-bottom:.3rem; }
     h3{ font-size:1.2rem; margin:1.5rem 0 .3rem; }
     p{ margin:.85rem 0; font-size: 1rem; }
-    .muted{ color:var(--muted); }
-    .small{ font-size:.9rem; }
     hr{ border:0; border-top:1px solid var(--rule); margin:2rem 0; }
 
-    /* Project list */
+    /* Projects */
     .projects dl{ margin:0; }
     .projects dt{ font-weight:600; font-size: 1rem; }
     .projects dd{ margin: 0 0 1.2rem 0; color:var(--muted); }
 
-    /* Blog styles */
+    /* Blog */
     .blog-post{ border-bottom: 1px solid var(--rule); margin-bottom: 2rem; padding-bottom: 1.5rem; }
     .blog-post:last-child{ border-bottom: none; margin-bottom: 0; }
     .blog-meta{ color: var(--muted); font-size: .9rem; margin-bottom: .5rem; }
-    .blog-excerpt{ margin: .75rem 0; }
     .read-more{ font-size: .9rem; font-weight: 500; }
     .blog-tags{ margin-top: .75rem; }
-    .tag{ display: inline-block; background: var(--rule); color: var(--muted); padding: .15rem .4rem; border-radius: .2rem; font-size: .8rem; margin-right: .3rem; margin-bottom: .3rem; }
+    .tag{ display: inline-block; background: var(--rule); color: var(--muted);
+          padding: .15rem .4rem; border-radius: .2rem; font-size: .8rem;
+          margin-right: .3rem; margin-bottom: .3rem; }
     .back-link{ margin-bottom: 1.5rem; font-size: .9rem; }
 
-    /* Navigation states */
+    /* Pages */
     .page{ display: none; }
     .page.active{ display: block; }
 
-    /* Infoperhour styles */
-    .infoperhour-description { margin-bottom: 2rem; padding: 1.5rem; background: var(--rule); border-radius: 8px; border-left: 4px solid var(--link); }
-    .website-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-top: 2rem; }
-    .website-tile { aspect-ratio: 1; border: 1px solid var(--rule); border-radius: 8px; padding: 1rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: var(--bg); transition: all 0.2s ease; text-decoration: none; color: var(--ink); }
-    .website-tile:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); border-color: var(--link); text-decoration: none; }
-    .website-tile:visited { color: var(--ink); }
-    .website-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; word-break: break-word; line-height: 1.2; }
-    .website-url { font-size: 0.7rem; color: var(--muted); word-break: break-all; line-height: 1.1; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+    /* Infoperhour */
+    .infoperhour-description {
+      margin-bottom: 2rem; padding: 1.5rem;
+      background: var(--rule); border-radius: 8px;
+      border-left: 4px solid var(--link);
+    }
+    .website-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1.2rem;
+      margin: 2rem auto;
+      padding: 0 0.5rem;
+      max-width: 100%;
+    }
+    .website-tile {
+      aspect-ratio: 1;
+      border: 1px solid var(--rule);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; background: var(--bg);
+      transition: all 0.2s ease;
+      text-decoration: none; color: var(--ink);
+      box-sizing: border-box;
+    }
+    .website-tile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-color: var(--link);
+    }
+    .website-name { font-weight: 600; font-size: 0.85rem; margin-bottom: 0.5rem; }
+    .website-url { font-size: 0.7rem; color: var(--muted); word-break: break-all; }
 
-    @media (max-width: 1200px) { .website-grid { grid-template-columns: repeat(4, 1fr); } }
-    @media (max-width: 768px) {
-      .container{ padding: 0 1rem; grid-template-columns: 1fr; max-width: var(--max-measure); gap: 2rem; }
-      .website-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
-      .website-tile { padding: 0.75rem; }
-      .website-name { font-size: 0.8rem; }
-      .website-url { font-size: 0.65rem; }
+    /* Footer */
+    footer{ border-top:1px solid var(--rule); margin-top:3rem; padding-top:1rem; color:var(--muted); text-align: center; }
+
+    /* Responsive */
+    @media (max-width: 1200px){
+      .container{ grid-template-columns: 1fr; }
+      .website-grid{ grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 0 1rem; }
+    }
+    @media (max-width: 768px){
+      .website-grid{ grid-template-columns: repeat(2, 1fr); gap: 0.75rem; padding: 0 0.5rem; }
       h1{ font-size: 1.8rem; }
       .brand{ font-size: 1.1rem; }
-      aside.site{ position: relative; top: auto; border-bottom: 1px solid var(--rule); padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
-      .twitter-sidebar{ order: -1; position: relative; top: auto; }
     }
-
-    /* Utilities */
-    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
-    .caps{ font-variant: small-caps; letter-spacing: .5px; }
-    code,kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:.95em; background: var(--rule); padding: .1em .3em; border-radius: .2em; }
-    pre{ background: var(--rule); padding: 1rem; border-radius: .3rem; overflow-x: auto; font-size: .9rem; }
-    pre code{ background: none; padding: 0; }
-    blockquote{ border-left: 3px solid var(--rule); padding-left: 1rem; margin-left: 0; color: var(--muted); font-style: italic; }
   </style>
 </head>
 <body>
-  <a id="top" class="sr-only">Top</a>
-  <div class="container">
-    <!-- Left sidebar (title, nav, metadata) -->
-    <aside class="site" aria-label="Site">
-      <div class="brand">Saptarshi Samanta</div>
-      <div class="tagline">GTM</div>
-      <nav aria-label="Sections">
-        <ul>
-          <li><a href="#about" class="nav-link active" aria-current="page">About</a></li>
-          <li><a href="#projects" class="nav-link">Projects</a></li>
-          <li><a href="#experience" class="nav-link">Experience</a></li>
-          <li><a href="#infoperhour" class="nav-link">Infoperhour</a></li>
-          <li><a href="#blog" class="nav-link">Blog</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="sidebar-meta">
-        <div><span class="caps">GitHub</span>: <a id="gh" href="https://github.com/saptarshisama" target="_blank" rel="noopener">@saptarshisama</a></div>
-        <div><span class="caps">LinkedIn</span>: <a id="li" href="https://www.linkedin.com/in/saptarshisama/" target="_blank" rel="noopener">My LinkedIn</a></div>
-        <div><span class="caps">Email</span>: <a id="em" href="mailto:saptarshi.samanta@hackerrank.com">saptarshi.samanta@hackerrank.com</a></div>
-        <div class="muted" id="updated">Updated: <time></time></div>
-      </div>
-    </aside>
+<a id="top" class="sr-only">Top</a>
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="site" aria-label="Site">
+    <div class="brand">Saptarshi Samanta</div>
+    <div class="tagline">GTM</div>
+    <nav>
+      <ul>
+        <li><a href="#about" class="nav-link active">About</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#infoperhour" class="nav-link">Infoperhour</a></li>
+        <li><a href="#blog" class="nav-link">Blog</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-meta">
+      <div><span class="caps">GitHub</span>: <a id="gh" href="#">@saptarshisama</a></div>
+      <div><span class="caps">LinkedIn</span>: <a id="li" href="#">My LinkedIn</a></div>
+      <div><span class="caps">Email</span>: <a id="em" href="#">saptarshi.samanta@zohomail.in</a></div>
+      <div class="muted" id="updated">Updated: <time></time></div>
+    </div>
+  </aside>
 
-    <!-- Main column -->
-    <main>
-      <!-- About Page -->
-      <article class="page active" id="about-page">
-        <header>
-          <h1>Saptarshi Samanta</h1>
-          <p class="muted">I want to see what all I can make without knowing actually how to code</p>
-        </header>
-        <section>
-          <h2>About</h2>
-          <p>
-            GTM at <em>HackerRank</em>. Interests: programming languages, tooling, data, UX. I prefer readable code,
-            small binaries, and benchmarks where they matter.
-          </p>
-          <p>
-            Résumé: <a id="resume" href="resume.pdf" target="_blank" rel="noopener">PDF</a>. Also see <a id="gh2" href="https://github.com/saptarshisama" target="_blank" rel="noopener">GitHub</a>.
-          </p>
-        </section>
-      </article>
+  <!-- Main -->
+  <main>
+    <!-- About -->
+    <article class="page active" id="about-page">
+      <header><h1>Saptarshi Samanta</h1></header>
+      <section>
+        <h2>About</h2>
+        <p>Engineer at <em>Company</em>. Interests: programming languages, tooling, data, UX.</p>
+      </section>
+    </article>
 
-      <!-- Projects Page -->
-      <article class="page" id="projects-page">
-        <header>
-          <h1>Projects</h1>
-          <p class="muted small">A selection; see repositories for full list.</p>
-        </header>
-        <section class="projects">
-          <dl id="plist"><!-- populated by JS --></dl>
-        </section>
-      </article>
+    <!-- Projects -->
+    <article class="page" id="projects-page">
+      <header><h1>Projects</h1></header>
+      <section class="projects"><dl id="plist"></dl></section>
+    </article>
 
-      <!-- Experience Page -->
-      <article class="page" id="experience-page">
-        <header>
-          <h1>Experience</h1>
-        </header>
-        <section>
-          <ul id="exp" class="small"><!-- populated by JS --></ul>
-        </section>
-      </article>
+    <!-- Experience -->
+    <article class="page" id="experience-page">
+      <header><h1>Experience</h1></header>
+      <section><ul id="exp"></ul></section>
+    </article>
 
-      <!-- Infoperhour Page -->
-      <article class="page" id="infoperhour-page">
-        <header>
-          <h1>Infoperhour</h1>
-        </header>
-        <section>
-          <div class="infoperhour-description">
-            <p>A curated collection of websites I visit regularly for learning, inspiration, and staying up-to-date with technology, programming, and ideas. These are the sources I turn to when I want to absorb quality information and perspectives.</p>
-            <p class="muted small">Click on any tile to visit the website. Each tile represents a valuable resource worth exploring.</p>
-          </div>
-          <div class="website-grid" id="website-grid"><!-- populated by JS --></div>
-        </section>
-      </article>
-
-      <!-- Blog Page -->
-      <article class="page" id="blog-page">
-        <header>
-          <h1>Blog</h1>
-          <p class="muted">Thoughts on technology, selling to engineers, and building things.</p>
-        </header>
-        <section id="blog-list"><!-- Blog posts will be populated by JS --></section>
-      </article>
-
-      <!-- Individual Blog Post -->
-      <article class="page" id="blog-post-page">
-        <div class="back-link">
-          <a href="#blog" class="nav-link">← Back to Blog</a>
+    <!-- Infoperhour -->
+    <article class="page" id="infoperhour-page">
+      <header><h1>Infoperhour</h1></header>
+      <section>
+        <div class="infoperhour-description">
+          <p>A curated collection of websites I visit regularly for learning, inspiration, and staying up-to-date with technology, programming, and ideas.</p>
         </div>
-        <div id="blog-post-content"><!-- Individual post content will be populated by JS --></div>
-      </article>
+        <div class="website-grid" id="website-grid"></div>
+      </section>
+    </article>
 
-      <!-- Contact Page -->
-      <article class="page" id="contact-page">
-        <header>
-          <h1>Contact</h1>
-        </header>
-        <section>
-          <p>Email <a id="em2" href="mailto:saptarshi.samanta@hackerrank.com">saptarshi.samanta@hackerrank.com</a>. I read everything.</p>
-        </section>
-        <footer>
-          <p>© <span id="year"></span> Saptarshi Samanta · <a href="#top" class="nav-link">Back to top</a></p>
-        </footer>
-      </article>
-    </main>
+    <!-- Blog -->
+    <article class="page" id="blog-page">
+      <header><h1>Blog</h1></header>
+      <section id="blog-list"></section>
+    </article>
 
-    <!-- Twitter Sidebar -->
-    <aside class="twitter-sidebar">
-      <div class="twitter-feed">
-        <div class="twitter-header">Latest Tweets</div>
-        <a class="twitter-timeline" data-height="600" data-theme="light" data-chrome="noheader nofooter noborders transparent" data-tweet-limit="5" href="https://twitter.com/saptarshisama?ref_src=twsrc%5Etfw">Tweets by @saptarshisama</a>
-      </div>
-    </aside>
-  </div>
+    <!-- Blog Post -->
+    <article class="page" id="blog-post-page">
+      <div class="back-link"><a href="#blog">← Back to Blog</a></div>
+      <div id="blog-post-content"></div>
+    </article>
 
-  <!-- Twitter Widget Script -->
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <!-- Contact -->
+    <article class="page" id="contact-page">
+      <header><h1>Contact</h1></header>
+      <section>
+        <p>Email <a id="em2" href="mailto:saptarshi.samanta@zohomail.in">saptarshi.samanta@zohomail.in</a></p>
+      </section>
+    </article>
 
-  <script>
-    // =====================
-    // Data (edit as needed)
-    // =====================
-    const SITE = {
-      name: "Saptarshi Samanta",
-      email: "saptarshi.samanta@hackerrank.com",
-      github: "saptarshisama",
-      linkedin: "saptarshisama",
-      resume: "resume.pdf",
-    };
+    <footer>
+      <p>© <span id="year"></span> Saptarshi Samanta · <a href="#top">Back to top</a></p>
+    </footer>
+  </main>
+</div>
 
-    const PROJECTS = [
-      {
-        title: "Project Alpha",
-        link: "https://github.com/saptarshisama/project-alpha",
-        extra: "Live demo",
-        extraLink: "https://saptarshisama.github.io/project-alpha/",
-        desc: "TypeScript/React. A fast, accessible UI toolkit."
-      },
-      {
-        title: "DataViz Toolkit",
-        link: "https://github.com/saptarshisama/dataviz-toolkit",
-        desc: "Python utilities for quick, reproducible charts."
-      },
-      {
-        title: "Tiny CLI",
-        link: "https://github.com/saptarshisama/tiny-cli",
-        desc: "Go-based command-line helper; single static binary."
-      },
-      {
-        title: "Landing Template",
-        link: "https://github.com/saptarshisama/landing-template",
-        extra: "Preview",
-        extraLink: "https://saptarshisama.github.io/landing-template/",
-        desc: "No-framework HTML/CSS starter focused on a11y."
-      }
-    ];
+<script>
+  // Navigation
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId + '-page').classList.add('active');
+    document.querySelectorAll('.nav-link').forEach(a => a.classList.remove('active'));
+    document.querySelector(`a[href="#${pageId}"]`).classList.add('active');
+  }
+  window.addEventListener('hashchange', () => {
+    const id = location.hash.replace('#','') || 'about';
+    showPage(id);
+  });
+  if(!location.hash) location.hash = "#about";
 
-    const EXPERIENCE = [
-      { org: "HackerRank", role: "GTM", when: "2024–Present" },
-      { org: "Company B", role: "Software Engineer", when: "2020–2023" },
-    ];
+  // Data
+  const PROJECTS = [
+    { title: "Project Alpha", link: "#", desc: "TypeScript/React toolkit." },
+    { title: "DataViz Toolkit", link: "#", desc: "Python charting utilities." }
+  ];
+  const EXPERIENCE = [
+    { org: "Company A", role: "Senior Software Engineer", when: "2023–Present" },
+    { org: "Company B", role: "Software Engineer", when: "2020–2023" }
+  ];
+  const WEBSITES = [
+    "https://www.gwern.net/", "https://www.lesswrong.com/", "https://geohot.github.io/blog/", "http://paulgraham.com/"
+  ];
+  const BLOG_POSTS = [
+    { id: 1, title: "Why I Build Without Frameworks", date: "2024-08-15", excerpt: "On vanilla web dev.", content: "<p>Simple is powerful.</p>", tags: ["webdev"] },
+    { id: 2, title: "Notes on Learning", date: "2024-07-01", excerpt: "Random experiments.", content: "<p>Always be learning.</p>", tags: ["thoughts"] }
+  ];
 
-    // Infoperhour websites
-    const WEBSITES = [
-      "https://www.gwern.net/", "https://www.lesswrong.com/", "https://reasonablypolymorphic.com/blog/monotonous-web/index.html", "https://dynomight.net/", "https://blog.jim-nielsen.com/", "https://geohot.github.io/blog/", "http://paulgraham.com/", "https://www.notboring.co/", "https://news.ycombinator.com/", "https://hack.org/mc/", "https://erischel.com/", "https://thenetworkstate.com/", "https://dsebastien.net/blog", "https://hackernoon.com/", "https://ljvmiranda921.github.io/", "https://tsk.bearblog.dev/", "https://www.doodles.dev/", "https://manishearth.github.io/", "https://peabee.substack.com/archive?sort=new", "https://crinacle.com/", "https://dukope.com/devlogs/", "https://dukope.com", "https://twitter.com/dukope", "http://blog.computationalcomplexity.org/", "https://alwaysasking.com/", "https://karpathy.github.io/", "https://alinpanaitiu.com/", "https://astralcodexten.substack.com/", "https://www.piratewires.com/", "https://amasad.me/", "https://blog.samaltman.com/", "https://borretti.me/article/", "https://invertedpassion.com/", "https://asianometry.substack.com/", "https://softwareengineeringdaily.com/", "https://25iq.com/", "https://randalolson.com/blog", "https://effectiveaccelerationism.substack.com/", "http://ggml.ai/", "https://newcriterion.com/", "https://arxiv.org/a/taleb_n_1.html", "https://nassimtaleb.org/category/writing/", "https://www.latent.space/", "http://www.incompleteideas.net/", "https://palmerluckey.com/", "https://www.righto.com/", "https://www.stephenwolfram.com/", "https://engineering.fb.com/", "https://jmmv.dev/essays.html", "https://arstechnica.com/", "https://gregbrockman.com/", "https://rekt.news/", "https://soumith.ch/", "https://www.realityslaststand.com/", "https://ai.stanford.edu/courses/", "https://nadh.in/", "http://localroger.com/", "https://www.unqualified-reservations.org/2008/04/open-letter-to-open-minded-progressives/", "https://ranprieur.com/essays.html", "http://www.catb.org/~esr/faqs/hacker-howto.html", "https://web.archive.org/web/20070613184827/http://yudkowsky.net/singularity.html", "https://research.google/", "https://sohl-dickstein.github.io/", "https://netflixtechblog.com/", "https://longstreet.typepad.com/thesciencebookstore/", "https://tracy.posthaven.com/", "https://jorgenveisdal.medium.com/", "https://skalskip.medium.com/", "http://prize.hutter1.net/hfaq.htm", "https://www.asianometry.com/archive", "https://www.svpg.com/articles/", "https://marcellus.in/newsletter-archives/", "https://book.premai.io/state-of-open-source-ai/mlops-engines/", "https://medisearch.io/", "https://annas-blog.org/duxiu-exclusive.html", "https://writings.stephenwolfram.com/", "https://wolframphysics.org/", "https://www.spytalk.co/", "http://fullafterburner.weebly.com/", "https://mathshistory.st-andrews.ac.uk/", "https://idrw.org/", "http://opendatastructures.org/", "https://space.skyrocket.de/index.html", "https://www.russianspaceweb.com/index.html", "https://supyo.xyz/", "https://www.b14643.de/", "http://www.astronautix.com/", "https://archive.org/details/conversations-with-the-crow-pdf/page/n5/mode/2up", "https://www.perplexity.ai/discover", "https://wtfhappenedin1971.com/", "https://wimflyc.blogspot.com/2021/01/the-henry-adams-curve-closer-look.html", "https://a16z.com/news-content/", "https://graymirror.substack.com/", "https://www.cs.ucdavis.edu/~koehl/Teaching/ECS188/PDF_files/Machine_stops.pdf", "https://awaisahmed.substack.com/", "https://bharatshakti.in/", "https://www.marginalia.nu/", "https://hrmacbeth.github.io/math2001/index.html", "https://simon.peytonjones.org/", "https://www.berkshirehathaway.com/letters/letters.html", "https://truthseekermusings.beehiiv.com/", "http://incompleteideas.net/", "https://adammaj.com/books", "https://tessellatum.in/", "https://justine.lol/index.html", "https://fsturmat.net/blog/", "https://ajkprojects.com/", "https://mesozoic-egg.github.io/tinygrad-notes/", "https://www.aitoppicks.com/", "https://explorer.globe.engineer/", "https://folklore.org/", "https://venturehacks.com/", "https://www.ryanhoover.me/writing", "https://annas-archive.org/", "https://www.jasoncarman.com/", "https://arc.net/e/D242E263-31FD-4CF9-A2D5-B67519C049AF", "https://thevalleyofcode.com/", "https://s2.q4cdn.com/299287126/files/doc_financials/annual/Amazon_Shareholder_Letter.pdf", "https://twobithistory.org/", "https://lelouch.dev/", "https://pallavaggarwal.in/", "https://owickstrom.github.io/the-monospace-web/#the-basics", "https://amansanger.com/", "https://nousresearch.com/", "https://habitualized.com/", "https://oggy.sh/chamber.html", "https://www.inference.net/", "https://darioamodei.com/", "https://medium.com/@dipamp_34109", "https://generative.ink/posts/", "https://ia.samaltman.com/", "https://www.dwarkeshpatel.com/", "https://www.semianalysis.com/", "https://phrack.org/", "https://darknetdiaries.com/", "https://planetscale.com/", "https://kartsci.org/kocomu/computer-history/graphical-user-interface-history/", "https://vin.gg/", "https://kayg.org/", "https://poeticengineering.substack.com/", "https://tokin.tv/", "https://www.matthewsiu.com/local-map", "https://en.app/", "https://openrouter.ai/", "https://www.plasticlist.org/", "https://bbycroft.net/llm", "https://nextspaceflight.com/", "https://lmarena.ai/", "https://www.arxival.xyz/", "https://www.swebench.com/", "https://press.stripe.com/", "https://www.are.na/maxim-leyzerovich/simulation-tools", "https://www.fast.ai/", "https://www.agentrecipes.com/", "https://americanaffairsjournal.org/2021/08/the-value-of-nothing-capital-versus-growth/", "https://horace.io/", "https://github.com/agno-agi/agno", "https://supaiku.com/", "https://karpathy.bearblog.dev/", "https://www.made-in-china.com/", "https://github.com/punkpeye/awesome-mcp-servers", "https://www.techemails.com/"
-    ];
-
-    // Blog posts data (filler; inspired by geohot's tone but original content)
-    const BLOG_POSTS = [
-      {
-        id: 1,
-        title: "Ship Ugly First",
-        date: "2025-08-10",
-        excerpt: "The fastest path to feedback is a button that does something — even if it's ugly.",
-        content: `
-          <p>Every time I waited for polish, I shipped late. The teams that win put something real in front of users <em>today</em>, then iterate hard.</p>
-          <h3>Rules I follow</h3>
-          <ul>
-            <li>Reduce scope until it fits in a day.</li>
-            <li>Prefer reversible decisions.</li>
-            <li>Default to text over slides.</li>
-          </ul>
-          <p>Beauty emerges from iteration, not from PRDs.</p>
-        `,
-        tags: ["execution", "product", "speed"]
-      },
-      {
-        id: 2,
-        title: "Selling to Engineers (Without Lying)",
-        date: "2025-08-05",
-        excerpt: "Engineers are allergic to fluff. Here's what actually works.",
-        content: `
-          <p>Most decks try to <em>impress</em>. Engineers want to <em>verify</em>. Replace adjectives with demos and benchmarks.</p>
-          <pre><code>// One slide that beats ten
-1. State the job-to-be-done
-2. Show a 60s demo
-3. Share a real metric (p95 improved 18%)</code></pre>
-          <p>That's it. Respect time, ship value.</p>
-        `,
-        tags: ["gtm", "sales", "engineering"]
-      },
-      {
-        id: 3,
-        title: "Tiny Scripts, Big Wins",
-        date: "2025-07-20",
-        excerpt: "A 12-line script saved me two hours a week.",
-        content: `
-          <p>I wrote a tiny CLI to turn call notes into bullets. The trick wasn't AI, it was <code>constraints</code> — always output five bullets, never more.</p>
-          <blockquote>"Constraints create taste."</blockquote>
-        `,
-        tags: ["automation", "cli", "focus"]
-      },
-      {
-        id: 4,
-        title: "What a 'Real' Pilot Looks Like",
-        date: "2025-07-12",
-        excerpt: "If you can't point to a metric, it's a demo, not a pilot.",
-        content: `
-          <p>Define success up front: owner, timeline, metric, and a kill switch.</p>
-          <ul>
-            <li>Owner: one name</li>
-            <li>Timeline: under 4 weeks</li>
-            <li>Metric: tied to money or time</li>
-            <li>Kill switch: pre-agreed stop date</li>
-          </ul>
-        `,
-        tags: ["pilot", "metrics", "process"]
-      },
-      {
-        id: 5,
-        title: "Readability > Cleverness",
-        date: "2025-06-30",
-        excerpt: "Future you is a stranger. Write for them.",
-        content: `
-          <p>Good names, short functions, boring tech. You don't need a framework to build a portfolio; this site runs on HTML, CSS, and a pinch of JS.</p>
-        `,
-        tags: ["craft", "simplicity"]
-      }
-    ];
-
-    // =====================
-    // Helpers
-    // =====================
-    const $ = (sel, root=document) => root.querySelector(sel);
-    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
-
-    function setActiveNav(hash) {
-      const page = (hash || "#about").replace('#','');
-      $$('.nav-link').forEach(a => {
-        const isActive = a.getAttribute('href') === `#${page}`;
-        a.classList.toggle('active', isActive);
-        if (isActive) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
-      });
+  // Render
+  const dl = document.getElementById('plist');
+  PROJECTS.forEach(p => {
+    const dt = document.createElement('dt');
+    dt.innerHTML = `<a href="${p.link}" target="_blank">${p.title}</a>`;
+    const dd = document.createElement('dd');
+    dd.textContent = p.desc;
+    dl.append(dt,dd);
+  });
+  const ul = document.getElementById('exp');
+  EXPERIENCE.forEach(j => {
+    const li = document.createElement('li');
+    li.textContent = `${j.role} — ${j.org} (${j.when})`;
+    ul.appendChild(li);
+  });
+  const wg = document.getElementById('website-grid');
+  WEBSITES.forEach(url => {
+    const a = document.createElement('a');
+    a.href = url; a.target="_blank"; a.className="website-tile";
+    const name = url.replace(/^https?:\/\//,'').replace(/\/$/,'');
+    a.innerHTML = `<div class="website-name">${name}</div><div class="website-url">${url}</div>`;
+    wg.appendChild(a);
+  });
+  const blogList = document.getElementById('blog-list');
+  BLOG_POSTS.forEach(post => {
+    const div = document.createElement('div');
+    div.className="blog-post";
+    div.innerHTML = `
+      <h3><a href="#post-${post.id}">${post.title}</a></h3>
+      <div class="blog-meta">${new Date(post.date).toDateString()}</div>
+      <div class="blog-excerpt">${post.excerpt}</div>
+      <a href="#post-${post.id}" class="read-more">Read more →</a>`;
+    blogList.appendChild(div);
+  });
+  function showBlogPost(postId){
+    const post = BLOG_POSTS.find(p => p.id==postId);
+    if(!post) return;
+    const div = document.getElementById('blog-post-content');
+    div.innerHTML = `<h1>${post.title}</h1><div class="blog-meta">${new Date(post.date).toDateString()}</div>${post.content}`;
+    showPage('blog-post');
+  }
+  window.addEventListener('hashchange', () => {
+    if(location.hash.startsWith('#post-')){
+      const id = location.hash.replace('#post-','');
+      showBlogPost(parseInt(id));
     }
+  });
 
-    function showPage(pageKey) {
-      $$('.page').forEach(p => p.classList.remove('active'));
-      const id = `${pageKey}-page`;
-      const el = document.getElementById(id);
-      if (el) el.classList.add('active');
-      setActiveNav(`#${pageKey}`);
-      // scroll to top of main column
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function handleHashChange() {
-      const hash = window.location.hash || '#about';
-      if (hash.startsWith('#post-')) {
-        const id = hash.replace('#post-','');
-        showBlogPost(id);
-        return;
-      }
-      const pageKey = hash.replace('#','');
-      const allowed = ['about','projects','experience','infoperhour','blog','contact'];
-      showPage(allowed.includes(pageKey) ? pageKey : 'about');
-    }
-
-    // =====================
-    // Renderers
-    // =====================
-    function renderMeta() {
-      document.title = `${SITE.name} — Portfolio`;
-      $('.brand').textContent = SITE.name;
-      $('#gh').href = `https://github.com/${SITE.github}`;
-      $('#gh').textContent = `@${SITE.github}`;
-      $('#gh2').href = `https://github.com/${SITE.github}`;
-      $('#li').href = `https://www.linkedin.com/in/${SITE.linkedin}/`;
-      $('#em').href = `mailto:${SITE.email}`;
-      $('#em').textContent = SITE.email;
-      $('#em2').href = `mailto:${SITE.email}`;
-      $('#em2').textContent = SITE.email;
-      $('#resume').href = SITE.resume;
-
-      const t = new Date();
-      $('#updated time').textContent = t.toISOString().slice(0,10);
-      $('#year').textContent = String(t.getFullYear());
-    }
-
-    function renderProjects() {
-      const dl = $('#plist');
-      dl.innerHTML = '';
-      PROJECTS.forEach(p => {
-        const dt = document.createElement('dt');
-        dt.innerHTML = `
-          <a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>
-          ${p.extra ? ` · <a href="${p.extraLink}" target="_blank" rel="noopener">${p.extra}</a>` : ''}
-        `;
-        const dd = document.createElement('dd');
-        dd.textContent = p.desc;
-        dl.append(dt, dd);
-      });
-    }
-
-    function renderExperience() {
-      const ul = $('#exp');
-      ul.innerHTML = '';
-      EXPERIENCE.forEach(j => {
-        const li = document.createElement('li');
-        li.textContent = `${j.role} — ${j.org} (${j.when})`;
-        ul.appendChild(li);
-      });
-    }
-
-    function renderWebsites() {
-      const grid = $('#website-grid');
-      grid.innerHTML = '';
-      WEBSITES.forEach(url => {
-        try {
-          const u = new URL(url);
-          const name = u.hostname.replace(/^www\./,'');
-          const a = document.createElement('a');
-          a.href = url;
-          a.target = '_blank';
-          a.rel = 'noopener';
-          a.className = 'website-tile';
-          a.innerHTML = `
-            <div class="website-name">${name}</div>
-            <div class="website-url">${u.href}</div>
-          `;
-          grid.appendChild(a);
-        } catch (e) {
-          // skip invalid URLs gracefully
-        }
-      });
-    }
-
-    function showBlogPost(postId) {
-      const post = BLOG_POSTS.find(p => p.id === parseInt(postId));
-      if (!post) return;
-      const contentDiv = $('#blog-post-content');
-      contentDiv.innerHTML = `
-        <header>
-          <h1>${post.title}</h1>
-          <div class="blog-meta">
-            <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-          </div>
-        </header>
-        <div class="blog-content">${post.content}</div>
-        <div class="blog-tags">${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>
-      `;
-      showPage('blog-post');
-      // reflect in URL for deep link
-      window.location.hash = `#post-${post.id}`;
-    }
-
-    function renderBlogList() {
-      const blogList = $('#blog-list');
-      const sortedPosts = [...BLOG_POSTS].sort((a, b) => new Date(b.date) - new Date(a.date));
-      blogList.innerHTML = sortedPosts.map(post => `
-        <div class="blog-post">
-          <h3><a href="#post-${post.id}">${post.title}</a></h3>
-          <div class="blog-meta">
-            <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-          </div>
-          <div class="blog-excerpt">${post.excerpt}</div>
-          <a href="#post-${post.id}" class="read-more">Read more →</a>
-          <div class="blog-tags">${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>
-        </div>
-      `).join('');
-    }
-
-    // Dark mode support for Twitter widget
-    function updateTwitterTheme() {
-      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const twitterTimeline = document.querySelector('.twitter-timeline');
-      if (twitterTimeline) {
-        twitterTimeline.setAttribute('data-theme', isDark ? 'dark' : 'light');
-      }
-    }
-
-    // =====================
-    // Init
-    // =====================
-    document.addEventListener('DOMContentLoaded', () => {
-      // hydrate meta & content
-      renderMeta();
-      renderProjects();
-      renderExperience();
-      renderWebsites();
-      renderBlogList();
-
-      // nav click -> hash routing
-      $$('.nav-link').forEach(a => a.addEventListener('click', (e) => {
-        const href = a.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          e.preventDefault();
-          if (href.startsWith('#post-')) {
-            // handled by hashchange below
-            window.location.hash = href;
-          } else {
-            window.location.hash = href;
-          }
-        }
-      }));
-
-      // hash router
-      window.addEventListener('hashchange', handleHashChange);
-      handleHashChange(); // initial
-
-      // twitter theme sync
-      updateTwitterTheme();
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      mq.addEventListener ? mq.addEventListener('change', updateTwitterTheme) : mq.addListener(updateTwitterTheme);
-    });
-  </script>
+  // Metadata
+  document.querySelector('#updated time').textContent = new Date().toISOString().slice(0,10);
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
