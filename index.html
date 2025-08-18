@@ -271,6 +271,93 @@
             display: block;
         }
 
+        /* Infoperhour styles */
+        .infoperhour-description {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--rule);
+            border-radius: 8px;
+            border-left: 4px solid var(--link);
+        }
+
+        .website-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .website-tile {
+            aspect-ratio: 1;
+            border: 1px solid var(--rule);
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--bg);
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: var(--ink);
+        }
+
+        .website-tile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: var(--link);
+            text-decoration: none;
+        }
+
+        .website-tile:visited {
+            color: var(--ink);
+        }
+
+        .website-name {
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            word-break: break-word;
+            line-height: 1.2;
+        }
+
+        .website-url {
+            font-size: 0.7rem;
+            color: var(--muted);
+            word-break: break-all;
+            line-height: 1.1;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        @media (max-width: 1200px) {
+            .website-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .website-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+            
+            .website-tile {
+                padding: 0.75rem;
+            }
+            
+            .website-name {
+                font-size: 0.8rem;
+            }
+            
+            .website-url {
+                font-size: 0.65rem;
+            }
+        }
+
         /* Footer */
         footer{
             border-top:1px solid var(--rule);
@@ -363,6 +450,7 @@
         }
     </style>
 </head>
+
 <body>
     <a id="top" class="sr-only">Top</a>
     <div class="container">
@@ -375,6 +463,7 @@
                     <li><a href="#about" class="nav-link active">About</a></li>
                     <li><a href="#projects" class="nav-link">Projects</a></li>
                     <li><a href="#experience" class="nav-link">Experience</a></li>
+                    <li><a href="#infoperhour" class="nav-link">Infoperhour</a></li>
                     <li><a href="#blog" class="nav-link">Blog</a></li>
                     <li><a href="#contact" class="nav-link">Contact</a></li>
                 </ul>
@@ -427,6 +516,23 @@
                 </section>
             </article>
 
+            <!-- Infoperhour Page -->
+            <article class="page" id="infoperhour-page">
+                <header>
+                    <h1>Infoperhour</h1>
+                </header>
+                <section>
+                    <div class="infoperhour-description">
+                        <p>A curated collection of websites I visit regularly for learning, inspiration, and staying up-to-date with technology, programming, and ideas. These are the sources I turn to when I want to absorb quality information and perspectives.</p>
+                        <p class="muted small">Click on any tile to visit the website. Each tile represents a valuable resource worth exploring.</p>
+                    </div>
+                    
+                    <div class="website-grid" id="website-grid">
+                        <!-- populated by JS -->
+                    </div>
+                </section>
+            </article>
+
             <!-- Blog Page -->
             <article class="page" id="blog-page">
                 <header>
@@ -470,10 +576,10 @@
                 <a class="twitter-timeline" 
                    data-height="600" 
                    data-theme="light" 
-                   data-chrome="noheader nofooter noborders transparent"
-                   data-tweet-limit="5"
+                   data-chrome="noheader nofooter noborders transparent" 
+                   data-tweet-limit="5" 
                    href="https://twitter.com/saptarshisama?ref_src=twsrc%5Etfw">
-                   Tweets by @saptarshisama
+                    Tweets by @saptarshisama
                 </a>
             </div>
         </aside>
@@ -524,6 +630,172 @@
             { org: "Company B", role: "Software Engineer", when: "2020–2023" },
         ];
 
+        // Infoperhour websites
+        const WEBSITES = [
+            "https://www.gwern.net/",
+            "https://www.lesswrong.com/",
+            "https://reasonablypolymorphic.com/blog/monotonous-web/index.html",
+            "https://dynomight.net/",
+            "https://blog.jim-nielsen.com/",
+            "https://geohot.github.io/blog/",
+            "http://paulgraham.com/",
+            "https://www.notboring.co/",
+            "https://news.ycombinator.com/",
+            "https://hack.org/mc/",
+            "https://erischel.com/",
+            "https://thenetworkstate.com/",
+            "https://dsebastien.net/blog",
+            "https://hackernoon.com/",
+            "https://ljvmiranda921.github.io/",
+            "https://tsk.bearblog.dev/",
+            "https://www.doodles.dev/",
+            "https://manishearth.github.io/",
+            "https://peabee.substack.com/archive?sort=new",
+            "https://crinacle.com/",
+            "https://dukope.com/devlogs/",
+            "https://dukope.com",
+            "https://twitter.com/dukope",
+            "http://blog.computationalcomplexity.org/",
+            "https://alwaysasking.com/",
+            "https://karpathy.github.io/",
+            "https://alinpanaitiu.com/",
+            "https://astralcodexten.substack.com/",
+            "https://www.piratewires.com/",
+            "https://amasad.me/",
+            "https://blog.samaltman.com/",
+            "https://borretti.me/article/",
+            "https://invertedpassion.com/",
+            "https://asianometry.substack.com/",
+            "https://softwareengineeringdaily.com/",
+            "https://25iq.com/",
+            "https://randalolson.com/blog",
+            "https://effectiveaccelerationism.substack.com/",
+            "http://ggml.ai/",
+            "https://newcriterion.com/",
+            "https://arxiv.org/a/taleb_n_1.html",
+            "https://nassimtaleb.org/category/writing/",
+            "https://www.latent.space/",
+            "http://www.incompleteideas.net/",
+            "https://palmerluckey.com/",
+            "https://www.righto.com/",
+            "https://www.stephenwolfram.com/",
+            "https://engineering.fb.com/",
+            "https://jmmv.dev/essays.html",
+            "https://arstechnica.com/",
+            "https://gregbrockman.com/",
+            "https://rekt.news/",
+            "https://soumith.ch/",
+            "https://www.realityslaststand.com/",
+            "https://ai.stanford.edu/courses/",
+            "https://nadh.in/",
+            "http://localroger.com/",
+            "https://www.unqualified-reservations.org/2008/04/open-letter-to-open-minded-progressives/",
+            "https://ranprieur.com/essays.html",
+            "http://www.catb.org/~esr/faqs/hacker-howto.html",
+            "https://web.archive.org/web/20070613184827/http://yudkowsky.net/singularity.html",
+            "https://research.google/",
+            "https://sohl-dickstein.github.io/",
+            "https://netflixtechblog.com/",
+            "https://longstreet.typepad.com/thesciencebookstore/",
+            "https://tracy.posthaven.com/",
+            "https://jorgenveisdal.medium.com/",
+            "https://skalskip.medium.com/",
+            "http://prize.hutter1.net/hfaq.htm",
+            "https://www.asianometry.com/archive",
+            "https://www.svpg.com/articles/",
+            "https://marcellus.in/newsletter-archives/",
+            "https://book.premai.io/state-of-open-source-ai/mlops-engines/",
+            "https://medisearch.io/",
+            "https://annas-blog.org/duxiu-exclusive.html",
+            "https://writings.stephenwolfram.com/",
+            "https://wolframphysics.org/",
+            "https://www.spytalk.co/",
+            "http://fullafterburner.weebly.com/",
+            "https://mathshistory.st-andrews.ac.uk/",
+            "https://idrw.org/",
+            "http://opendatastructures.org/",
+            "https://space.skyrocket.de/index.html",
+            "https://www.russianspaceweb.com/index.html",
+            "https://supyo.xyz/",
+            "https://www.b14643.de/",
+            "http://www.astronautix.com/",
+            "https://archive.org/details/conversations-with-the-crow-pdf/page/n5/mode/2up",
+            "https://www.perplexity.ai/discover",
+            "https://wtfhappenedin1971.com/",
+            "https://wimflyc.blogspot.com/2021/01/the-henry-adams-curve-closer-look.html",
+            "https://a16z.com/news-content/",
+            "https://graymirror.substack.com/",
+            "https://www.cs.ucdavis.edu/~koehl/Teaching/ECS188/PDF_files/Machine_stops.pdf",
+            "https://awaisahmed.substack.com/",
+            "https://bharatshakti.in/",
+            "https://www.marginalia.nu/",
+            "https://hrmacbeth.github.io/math2001/index.html",
+            "https://simon.peytonjones.org/",
+            "https://www.berkshirehathaway.com/letters/letters.html",
+            "https://truthseekermusings.beehiiv.com/",
+            "http://incompleteideas.net/",
+            "https://adammaj.com/books",
+            "https://tessellatum.in/",
+            "https://justine.lol/index.html",
+            "https://fsturmat.net/blog/",
+            "https://ajkprojects.com/",
+            "https://mesozoic-egg.github.io/tinygrad-notes/",
+            "https://www.aitoppicks.com/",
+            "https://explorer.globe.engineer/",
+            "https://folklore.org/",
+            "https://venturehacks.com/",
+            "https://www.ryanhoover.me/writing",
+            "https://annas-archive.org/",
+            "https://www.jasoncarman.com/",
+            "https://arc.net/e/D242E263-31FD-4CF9-A2D5-B67519C049AF",
+            "https://thevalleyofcode.com/",
+            "https://s2.q4cdn.com/299287126/files/doc_financials/annual/Amazon_Shareholder_Letter.pdf",
+            "https://twobithistory.org/",
+            "https://lelouch.dev/",
+            "https://pallavaggarwal.in/",
+            "https://owickstrom.github.io/the-monospace-web/#the-basics",
+            "https://amansanger.com/",
+            "https://nousresearch.com/",
+            "https://habitualized.com/",
+            "https://oggy.sh/chamber.html",
+            "https://www.inference.net/",
+            "https://darioamodei.com/",
+            "https://medium.com/@dipamp_34109",
+            "https://generative.ink/posts/",
+            "https://ia.samaltman.com/",
+            "https://www.dwarkeshpatel.com/",
+            "https://www.semianalysis.com/",
+            "https://phrack.org/",
+            "https://darknetdiaries.com/",
+            "https://planetscale.com/",
+            "https://kartsci.org/kocomu/computer-history/graphical-user-interface-history/",
+            "https://vin.gg/",
+            "https://kayg.org/",
+            "https://poeticengineering.substack.com/",
+            "https://tokin.tv/",
+            "https://www.matthewsiu.com/local-map",
+            "https://en.app/",
+            "https://openrouter.ai/",
+            "https://www.plasticlist.org/",
+            "https://bbycroft.net/llm",
+            "https://nextspaceflight.com/",
+            "https://lmarena.ai/",
+            "https://www.arxival.xyz/",
+            "https://www.swebench.com/",
+            "https://press.stripe.com/",
+            "https://www.are.na/maxim-leyzerovich/simulation-tools",
+            "https://www.fast.ai/",
+            "https://www.agentrecipes.com/",
+            "https://americanaffairsjournal.org/2021/08/the-value-of-nothing-capital-versus-growth/",
+            "https://horace.io/",
+            "https://github.com/agno-agi/agno",
+            "https://supaiku.com/",
+            "https://karpathy.bearblog.dev/",
+            "https://www.made-in-china.com/",
+            "https://github.com/punkpeye/awesome-mcp-servers",
+            "https://www.techemails.com/"
+        ];
+
         // Blog posts data
         const BLOG_POSTS = [
             {
@@ -531,232 +803,7 @@
                 title: "Building Without Frameworks: My Journey",
                 date: "2024-08-15",
                 excerpt: "Why I chose to build my portfolio with vanilla HTML, CSS, and JavaScript, and what I learned along the way.",
-                content: `
-                    <p>When I started building my portfolio, I had a choice: use a modern framework like React or Next.js, or go back to basics with vanilla technologies. I chose the latter, and here's why.</p>
-                    
-                    <h3>The Simplicity Advantage</h3>
-                    <p>There's something refreshing about writing plain HTML, CSS, and JavaScript. No build steps, no dependencies, no complex tooling. Just open a text editor and start creating.</p>
-                    
-                    <blockquote>
-                        "Simplicity is the ultimate sophistication." — Leonardo da Vinci
-                    </blockquote>
-                    
-                    <p>This approach taught me to really understand the fundamentals. When you can't reach for a library, you have to solve problems creatively with the tools at hand.</p>
-                    
-                    <h3>Performance Benefits</h3>
-                    <p>The result is a blazingly fast website. No JavaScript bundles to download, no hydration delays. Just clean, semantic HTML that loads instantly.</p>
-                    
-                    <pre><code>// Simple navigation without a router
-function showPage(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(pageId + '-page').classList.add('active');
-}</code></pre>
-                    
-                    <p>Sometimes the old ways are the best ways.</p>
-                `,
-                tags: ["web development", "vanilla js", "performance"]
-            },
-            {
-                id: 2,
-                title: "CSS Grid vs Flexbox: When to Use What",
-                date: "2024-08-10",
-                excerpt: "A practical guide to choosing between CSS Grid and Flexbox for different layout scenarios.",
-                content: `
-                    <p>CSS Grid and Flexbox are both powerful layout tools, but they serve different purposes. Here's when to use each one.</p>
-                    
-                    <h3>Use Flexbox for One-Dimensional Layouts</h3>
-                    <p>Flexbox excels at distributing space along a single axis. Perfect for navigation bars, button groups, or centering content.</p>
-                    
-                    <pre><code>.nav-items {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}</code></pre>
-                    
-                    <h3>Use CSS Grid for Two-Dimensional Layouts</h3>
-                    <p>Grid is your go-to for complex layouts that need both rows and columns. Like the overall page structure of this portfolio.</p>
-                    
-                    <pre><code>.container {
-    display: grid;
-    grid-template-columns: 1fr 70ch 320px;
-    gap: 3rem;
-}</code></pre>
-                    
-                    <h3>They Work Great Together</h3>
-                    <p>Don't think of them as competing technologies. Use Grid for the overall layout structure, then use Flexbox for component-level alignment and distribution.</p>
-                `,
-                tags: ["css", "layout", "flexbox", "grid"]
-            },
-            {
-                id: 3,
-                title: "The Art of Readable Code",
-                date: "2024-08-05",
-                excerpt: "Writing code that humans can understand is just as important as making it work. Here are my principles for readable code.",
-                content: `
-                    <p>Code is written once but read many times. Here's how to make your future self (and your teammates) thank you.</p>
-                    
-                    <h3>Choose Descriptive Names</h3>
-                    <p>Variable and function names should tell a story. Compare these two approaches:</p>
-                    
-                    <pre><code>// Unclear
-function calc(d, r) {
-    return d * r * 0.01;
-}
-
-// Clear
-function calculateDiscountAmount(price, discountRate) {
-    return price * discountRate * 0.01;
-}</code></pre>
-                    
-                    <h3>Write Self-Documenting Code</h3>
-                    <p>Good code explains itself. Comments should explain <em>why</em>, not <em>what</em>.</p>
-                    
-                    <h3>Keep Functions Small and Focused</h3>
-                    <p>A function should do one thing and do it well. If you need "and" to describe what your function does, it's probably doing too much.</p>
-                    
-                    <p>Remember: Code is for humans first, computers second.</p>
-                `,
-                tags: ["programming", "best practices", "clean code"]
-            }
-        ];
-
-        // Navigation system
-        function initNavigation() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const target = link.getAttribute('href').substring(1);
-                    
-                    // Update active nav link
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
-                    
-                    // Show target page
-                    showPage(target);
-                });
-            });
-        }
-
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show target page
-            const targetPage = document.getElementById(pageId + '-page');
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-        }
-
-        function showBlogPost(postId) {
-            const post = BLOG_POSTS.find(p => p.id === parseInt(postId));
-            if (!post) return;
-
-            const contentDiv = document.getElementById('blog-post-content');
-            contentDiv.innerHTML = `
-                <header>
-                    <h1>${post.title}</h1>
-                    <div class="blog-meta">
-                        <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', { 
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: 'numeric' 
-                        })}</time>
-                    </div>
-                </header>
-                <div class="blog-content">
-                    ${post.content}
-                </div>
-                <div class="blog-tags">
-                    ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
-            `;
-
-            showPage('blog-post');
-        }
-
-        function renderBlogList() {
-            const blogList = document.getElementById('blog-list');
-            const sortedPosts = BLOG_POSTS.sort((a, b) => new Date(b.date) - new Date(a.date));
-            
-            blogList.innerHTML = sortedPosts.map(post => `
-                <div class="blog-post">
-                    <h3><a href="#" onclick="showBlogPost(${post.id}); return false;">${post.title}</a></h3>
-                    <div class="blog-meta">
-                        <time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US', { 
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: 'numeric' 
-                        })}</time>
-                    </div>
-                    <div class="blog-excerpt">${post.excerpt}</div>
-                    <a href="#" class="read-more" onclick="showBlogPost(${post.id}); return false;">Read more →</a>
-                    <div class="blog-tags">
-                        ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Dark mode support for Twitter widget
-        function updateTwitterTheme() {
-            const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const twitterTimeline = document.querySelector('.twitter-timeline');
-            if (twitterTimeline) {
-                twitterTimeline.setAttribute('data-theme', isDark ? 'dark' : 'light');
-            }
-        }
-
-        // Bind site metadata
-        document.title = `${SITE.name} — Portfolio`;
-        document.querySelector('.brand').textContent = SITE.name;
-        document.getElementById('gh').href = `https://github.com/${SITE.github}`;
-        document.getElementById('gh').textContent = `@${SITE.github}`;
-        document.getElementById('gh2').href = `https://github.com/${SITE.github}`;
-        document.getElementById('li').href = `https://www.linkedin.com/in/${SITE.linkedin}/`;
-        document.getElementById('em').href = `mailto:${SITE.email}`;
-        document.getElementById('em').textContent = SITE.email;
-        document.getElementById('em2').href = `mailto:${SITE.email}`;
-        document.getElementById('em2').textContent = SITE.email;
-        document.getElementById('resume').href = SITE.resume;
-
-        // Updated time
-        const t = new Date();
-        document.querySelector('#updated time').textContent = t.toISOString().slice(0,10);
-        document.getElementById('year').textContent = t.getFullYear();
-
-        // Render project list
-        const dl = document.getElementById('plist');
-        PROJECTS.forEach(p => {
-            const dt = document.createElement('dt');
-            dt.innerHTML = `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>` +
-                (p.extra ? ` · <a href="${p.extraLink}" target="_blank" rel="noopener">${p.extra}</a>` : '');
-            const dd = document.createElement('dd');
-            dd.textContent = p.desc;
-            dl.append(dt, dd);
-        });
-
-        // Render experience
-        const ul = document.getElementById('exp');
-        EXPERIENCE.forEach(j => {
-            const li = document.createElement('li');
-            li.textContent = `${j.role} — ${j.org} (${j.when})`;
-            ul.appendChild(li);
-        });
-
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            initNavigation();
-            renderBlogList();
-            updateTwitterTheme();
-            
-            // Listen for theme changes
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(updateTwitterTheme);
-        });
-    </script>
-</body>
-</html>
+                content: `<p>When I started building my portfolio, I had a choice: use a modern framework like React or Next.js, or go back to basics with vanilla technologies. I chose the latter, and here's why.</p>
+                         <h3>The Simplicity Advantage</h3>
+                         <p>There's something refreshing about writing plain HTML, CSS, and JavaScript. No build steps, no dependencies, no complex tooling. Just open a text editor and start creating.</p>
+                         <blockquote>"Simplicity is the ultimate sophistication." — Leonardo da V
