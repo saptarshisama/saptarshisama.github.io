@@ -38,7 +38,7 @@
     a:visited{ color:var(--link-visited); }
     a:hover{ text-decoration: underline; text-underline-offset:.15em; text-decoration-thickness:.06em; }
 
-    /* ===== Centered Layout (desktop) ===== */
+    /* ===== Centered Layout (geohot-ish) ===== */
     .container{
       max-width: 1200px;     /* keeps equal margins on big screens */
       margin: 0 auto;        /* centers the whole site */
@@ -123,26 +123,11 @@
     /* Footer */
     footer{ border-top:1px solid var(--rule); margin-top:3rem; padding-top:1rem; color:var(--muted); text-align:center; }
 
-    /* ===== Mobile-only header + retractable menu ===== */
-    .mobile-header{
-      display:none;
-      position:sticky; top:0; z-index:1000;
-      background:var(--bg);
-      border-bottom:1px solid var(--rule);
-      padding: .75rem 1rem;
-      display:flex; align-items:center; justify-content:space-between;
-    }
+    /* ===== Mobile: header + retractable menu (surgical add) ===== */
+    .mobile-header{ display:none; position:sticky; top:0; z-index:1000; background:var(--bg); border-bottom:1px solid var(--rule); padding:.75rem 1rem; align-items:center; justify-content:space-between; }
     .mobile-brand{ font-weight:700; }
-    #menu-toggle{
-      font-size:1.5rem; line-height:1; background:none; border:none; cursor:pointer; color:var(--ink);
-    }
-    #mobile-menu{
-      display:none;
-      border-bottom:1px solid var(--rule);
-      background:var(--bg);
-      padding: .75rem 1rem 1rem;
-      animation: slideDown .2s ease;
-    }
+    #menu-toggle{ font-size:1.5rem; line-height:1; background:none; border:none; cursor:pointer; color:var(--ink); }
+    #mobile-menu{ display:none; border-bottom:1px solid var(--rule); background:var(--bg); padding:.75rem 1rem 1rem; }
     #mobile-menu ul{ list-style:none; margin:0 0 .75rem 0; padding:0; }
     #mobile-menu li{ margin:.5rem 0; }
     #mobile-menu a{ color:var(--ink); font-size:1.05rem; }
@@ -150,9 +135,7 @@
     .mobile-meta{ font-size:.9rem; color:var(--muted); border-top:1px solid var(--rule); padding-top:.75rem; }
     .mobile-meta > div{ margin:.35rem 0; }
 
-    @keyframes slideDown{ from{ opacity:0; transform:translateY(-4px);} to{ opacity:1; transform:none; } }
-
-    /* ===== Responsive ===== */
+    /* Responsive */
     @media (max-width: 1100px){
       .container{ grid-template-columns: 1fr; max-width: var(--max-measure); }
       article{ max-width: var(--max-measure); }
@@ -164,7 +147,7 @@
       .website-grid{ gap:.75rem; padding:0 .5rem; }
       h1{ font-size:1.8rem; }
       .brand{ font-size:1.1rem; }
-      aside.site{ display:none; } /* Hide desktop sidebar on mobile */
+      aside.site{ display:none; } /* Hide desktop sidebar on mobile only */
       .mobile-header{ display:flex; }
     }
 
@@ -179,7 +162,7 @@
 <body>
   <a id="top" class="sr-only">Top</a>
 
-  <!-- ===== Mobile Header & Menu (only visible on small screens) ===== -->
+  <!-- Mobile header/menu (added) -->
   <header class="mobile-header" aria-label="Mobile header">
     <div class="mobile-brand">Saptarshi Samanta</div>
     <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">☰</button>
@@ -202,7 +185,7 @@
   </nav>
 
   <div class="container">
-    <!-- Sidebar (desktop) -->
+    <!-- Sidebar (kept simple & symmetric) -->
     <aside class="site" aria-label="Site">
       <div class="brand">Saptarshi Samanta</div>
       <div class="tagline">GTM</div>
@@ -304,8 +287,7 @@
 
     const PROJECTS = [
       { title: "Porfolio-Analyzer", link: "https://porfolio-analyzer.onrender.com/", extra: "Code", extraLink: "https://github.com/saptarshisama/Porfolio-Analyzer", desc: "Your portfolio vs the market analyser" },
-      { title: "Global-Stock-Indices-Log-Return-Visualizer", link: "https://github.com/saptarshisama/Global-Stock-Indices-Log-Return-Visualizer", extra: "Screenshot", extraLink: "https://private-user-images.githubusercontent.com/60577363/469287269-cfc9091b-56cc-4167-b1c0-0161661aafaf.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NTYwNTk1MzgsIm5iZiI6MTc1NjA1OTIzOCwicGF0aCI6Ii82MDU3NzM2My80NjkyODcyNjktY2ZjOTA5MWItNTZjYy00MTY3LWIxYzAtMDE2MTY2MWFhZmFmLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA4MjQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwODI0VDE4MTM1OFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWE5YjEwMzZkMDliMjNlNzQwZDkxYTIyOTFmNmM3NzUxNmFkMjlmOGY4NTg4NzFmYzNhNmRjMjAyYzViY2I1NDUmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.fkVBc8VEheWLrqDAPKt6XVWhZFb_BSj4gVqoJypaoBA", desc: "Visualize and compare cumulative log returns of global stock indices and Bitcoin since 2025.
-" },
+      { title: "Global-Stock-Indices-Log-Return-Visualizer", link: "https://github.com/saptarshisama/Global-Stock-Indices-Log-Return-Visualizer", extra: "Screenshot", extraLink: "https://private-user-images.githubusercontent.com/60577363/469287269-cfc9091b-56cc-4167-b1c0-0161661aafaf.png", desc: "Visualize and compare cumulative log returns of global stock indices and Bitcoin since 2025." },
       { title: "Tiny CLI", link: "https://github.com/saptarshisama/tiny-cli", desc: "Go-based command-line helper; single static binary." },
       { title: "Landing Template", link: "https://github.com/saptarshisama/landing-template", extra: "Preview", extraLink: "https://saptarshisama.github.io/landing-template/", desc: "No-framework HTML/CSS starter focused on a11y." },
     ];
@@ -359,7 +341,9 @@ content:`<p>Imagine you’re debugging a system at 3 a.m., logs streaming across
 <p>That is how engineers think. They live in a world where truth is testable, where bullshit doesn’t compile. So when you try to sell to them, the normal playbook of inflating the numbers, polishing the deck, or positioning the product fails. They can smell the lie instantly. They have been trained by reality itself, and reality doesn’t negotiate.</p>
 <p>The mistake most founders make is treating engineers like any other market. Engineers are allergic to hype. If you tell them your database is “10x faster,” they will benchmark it themselves. If you say your tool “never fails,” they will crash it within an hour. If you call your API “simple,” they will know in 30 seconds whether it is or isn’t. With engineers, words are weak currency. Proof is the only coin that spends.</p>
 <p>So how do you sell to engineers? You don’t sell, you show. You put the code on GitHub. You open your API docs. You let them try the demo without asking for their email. You let the product take the beating, because that is exactly what they are going to do anyway. And if your thing survives, they will respect it in a way no pitch ever could.</p>
-<pre><code>1) Job-to-be-done\n2) 60s demo\n3) One real metric</code></pre>
+<pre><code>1) Job-to-be-done
+2) 60s demo
+3) One real metric</code></pre>
 <p>It is tempting to lie because lying feels like a shortcut. But with engineers, a shortcut is a dead end. The irony is that truth, shown clearly and plainly, is the fastest way through. If your product is good, it doesn’t need hype. And if it is not, no amount of storytelling will save it. Honesty is not just a moral stance here, it is a competitive advantage.</p>
 <p>The world already has too much noise. Engineers crave signal. Give them signal, raw and unembellished. Say what your product does, show how it works, let them verify. If it is real, they will use it and they will tell others. If it isn’t, no pitch will help you anyway.</p>
 <p>Selling to engineers without lying is not just possible, it is the only way that ever works. Because in the end, engineers don’t buy the story. They buy the truth.</p>`, tags:["gtm","sales","engineering"] },
@@ -394,7 +378,7 @@ content:`<p>Imagine you’re debugging a system at 3 a.m., logs streaming across
       const key = h.replace('#','');
       const allowed = ['about','projects','experience','infoperhour','blog','contact'];
       showPage(allowed.includes(key)?key:'about');
-      // Close mobile menu after navigation
+      // Close mobile menu after navigation (added)
       const menu = document.getElementById('mobile-menu');
       const btn = document.getElementById('menu-toggle');
       if(menu && btn && getComputedStyle(btn).display !== 'none'){
@@ -490,19 +474,15 @@ content:`<p>Imagine you’re debugging a system at 3 a.m., logs streaming across
     // --- Init ---
     document.addEventListener('DOMContentLoaded', ()=>{
       renderMeta(); renderProjects(); renderExperience(); renderWebsites(); renderBlogList();
-
-      // Desktop + mobile links use the same .nav-link class
       $$('.nav-link').forEach(a=>a.addEventListener('click', e=>{
         const href = a.getAttribute('href');
         if(href && href.startsWith('#')){ e.preventDefault(); window.location.hash = href; }
       }));
-
-      // React to hash changes
       window.addEventListener('hashchange', handleHash);
       if(!window.location.hash) window.location.hash='#about';
       handleHash();
 
-      // Mobile menu toggle
+      // Mobile menu toggle (added)
       const toggle = document.getElementById('menu-toggle');
       const menu = document.getElementById('mobile-menu');
       if(toggle && menu){
