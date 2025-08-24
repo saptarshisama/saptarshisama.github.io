@@ -38,7 +38,7 @@
     a:visited{ color:var(--link-visited); }
     a:hover{ text-decoration: underline; text-underline-offset:.15em; text-decoration-thickness:.06em; }
 
-    /* ===== Centered Layout (geohot-ish) ===== */
+    /* ===== Centered Layout (desktop) ===== */
     .container{
       max-width: 1200px;     /* keeps equal margins on big screens */
       margin: 0 auto;        /* centers the whole site */
@@ -123,7 +123,36 @@
     /* Footer */
     footer{ border-top:1px solid var(--rule); margin-top:3rem; padding-top:1rem; color:var(--muted); text-align:center; }
 
-    /* Responsive */
+    /* ===== Mobile-only header + retractable menu ===== */
+    .mobile-header{
+      display:none;
+      position:sticky; top:0; z-index:1000;
+      background:var(--bg);
+      border-bottom:1px solid var(--rule);
+      padding: .75rem 1rem;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .mobile-brand{ font-weight:700; }
+    #menu-toggle{
+      font-size:1.5rem; line-height:1; background:none; border:none; cursor:pointer; color:var(--ink);
+    }
+    #mobile-menu{
+      display:none;
+      border-bottom:1px solid var(--rule);
+      background:var(--bg);
+      padding: .75rem 1rem 1rem;
+      animation: slideDown .2s ease;
+    }
+    #mobile-menu ul{ list-style:none; margin:0 0 .75rem 0; padding:0; }
+    #mobile-menu li{ margin:.5rem 0; }
+    #mobile-menu a{ color:var(--ink); font-size:1.05rem; }
+    #mobile-menu a:hover{ text-decoration:underline; }
+    .mobile-meta{ font-size:.9rem; color:var(--muted); border-top:1px solid var(--rule); padding-top:.75rem; }
+    .mobile-meta > div{ margin:.35rem 0; }
+
+    @keyframes slideDown{ from{ opacity:0; transform:translateY(-4px);} to{ opacity:1; transform:none; } }
+
+    /* ===== Responsive ===== */
     @media (max-width: 1100px){
       .container{ grid-template-columns: 1fr; max-width: var(--max-measure); }
       article{ max-width: var(--max-measure); }
@@ -135,7 +164,8 @@
       .website-grid{ gap:.75rem; padding:0 .5rem; }
       h1{ font-size:1.8rem; }
       .brand{ font-size:1.1rem; }
-      aside.site{ position:relative; top:auto; border-bottom:1px solid var(--rule); padding-bottom:1.5rem; margin-bottom:1.5rem; }
+      aside.site{ display:none; } /* Hide desktop sidebar on mobile */
+      .mobile-header{ display:flex; }
     }
 
     /* Utilities */
@@ -148,8 +178,31 @@
 </head>
 <body>
   <a id="top" class="sr-only">Top</a>
+
+  <!-- ===== Mobile Header & Menu (only visible on small screens) ===== -->
+  <header class="mobile-header" aria-label="Mobile header">
+    <div class="mobile-brand">Saptarshi Samanta</div>
+    <button id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+  </header>
+  <nav id="mobile-menu" aria-label="Mobile menu">
+    <ul>
+      <li><a href="#about" class="nav-link">About</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#experience" class="nav-link">Experience</a></li>
+      <li><a href="#infoperhour" class="nav-link">Infoperhour</a></li>
+      <li><a href="#blog" class="nav-link">Blog</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+    <div class="mobile-meta">
+      <div><span class="caps">GitHub</span>: <a id="gh-mobile" href="https://github.com/saptarshisama" target="_blank" rel="noopener">@saptarshisama</a></div>
+      <div><span class="caps">LinkedIn</span>: <a id="li-mobile" href="https://www.linkedin.com/in/saptarshisama/" target="_blank" rel="noopener">My LinkedIn</a></div>
+      <div><span class="caps">Email</span>: <a id="em-mobile" href="mailto:saptarshi.samanta@hackerrank.com">saptarshi.samanta@hackerrank.com</a></div>
+      <div class="muted" id="updated-mobile">Updated: <time></time></div>
+    </div>
+  </nav>
+
   <div class="container">
-    <!-- Sidebar (kept simple & symmetric) -->
+    <!-- Sidebar (desktop) -->
     <aside class="site" aria-label="Site">
       <div class="brand">Saptarshi Samanta</div>
       <div class="tagline">GTM</div>
@@ -257,7 +310,7 @@
     ];
 
     const EXPERIENCE = [
-      { org: "HackerRank", role: "GTM", when: "Juy 2025 –Present" },
+      { org: "HackerRank", role: "GTM", when: "July 2025 – Present" },
     ];
 
     // === FULL Infoperhour list (restored) ===
@@ -340,6 +393,13 @@ content:`<p>Imagine you’re debugging a system at 3 a.m., logs streaming across
       const key = h.replace('#','');
       const allowed = ['about','projects','experience','infoperhour','blog','contact'];
       showPage(allowed.includes(key)?key:'about');
+      // Close mobile menu after navigation
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('menu-toggle');
+      if(menu && btn && getComputedStyle(btn).display !== 'none'){
+        menu.style.display = 'none';
+        btn.setAttribute('aria-expanded','false');
+      }
     }
 
     // --- Renderers ---
@@ -355,9 +415,17 @@ content:`<p>Imagine you’re debugging a system at 3 a.m., logs streaming across
       $('#em2').href = `mailto:${SITE.email}`;
       $('#em2').textContent = SITE.email;
 
+      // Mobile meta links
+      const ghm = $('#gh-mobile'); if(ghm){ ghm.href = `https://github.com/${SITE.github}`; ghm.textContent = `@${SITE.github}`; }
+      const lim = $('#li-mobile'); if(lim){ lim.href = `https://www.linkedin.com/in/${SITE.linkedin}/`; }
+      const emm = $('#em-mobile'); if(emm){ emm.href = `mailto:${SITE.email}`; emm.textContent = SITE.email; }
+
       const t = new Date();
-      $('#updated time').textContent = t.toISOString().slice(0,10);
-      $('#year').textContent = String(t.getFullYear());
+      const iso = t.toISOString().slice(0,10);
+      const y = String(t.getFullYear());
+      const upd1 = $('#updated time'); if(upd1) upd1.textContent = iso;
+      const upd2 = $('#updated-mobile time'); if(upd2) upd2.textContent = iso;
+      const yr = $('#year'); if(yr) yr.textContent = y;
     }
     function renderProjects(){
       const dl = $('#plist'); dl.innerHTML='';
@@ -421,13 +489,28 @@ content:`<p>Imagine you’re debugging a system at 3 a.m., logs streaming across
     // --- Init ---
     document.addEventListener('DOMContentLoaded', ()=>{
       renderMeta(); renderProjects(); renderExperience(); renderWebsites(); renderBlogList();
+
+      // Desktop + mobile links use the same .nav-link class
       $$('.nav-link').forEach(a=>a.addEventListener('click', e=>{
         const href = a.getAttribute('href');
         if(href && href.startsWith('#')){ e.preventDefault(); window.location.hash = href; }
       }));
+
+      // React to hash changes
       window.addEventListener('hashchange', handleHash);
       if(!window.location.hash) window.location.hash='#about';
       handleHash();
+
+      // Mobile menu toggle
+      const toggle = document.getElementById('menu-toggle');
+      const menu = document.getElementById('mobile-menu');
+      if(toggle && menu){
+        toggle.addEventListener('click', ()=>{
+          const isOpen = menu.style.display === 'block';
+          menu.style.display = isOpen ? 'none' : 'block';
+          toggle.setAttribute('aria-expanded', String(!isOpen));
+        });
+      }
     });
   </script>
 </body>
