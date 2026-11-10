@@ -227,6 +227,11 @@
     { "url": "https://samwho.dev/rss.xml", "name": "Samwho RSS", "category": "Programming" },
     { "url": "https://zwibbler.com/clipart/", "name": "Zwibbler Clipart", "category": "Design" },
     { "url": "https://legacy.python.org/workshops/1994-11/attendees.pics.html", "name": "Python Workshop 1994", "category": "Technology History" },
-    { "url": "https://opengridworks.com/power-plants", "name": "Open Grid Power Plants", "category": "Energy" }
+    { "url": "https://opengridworks.com/power-plants", "name": "Open Grid Power Plants", "category": "Energy" },
+    { "url": "https://paperswithcode.co/conferences/cvpr-2026", "name": "Papers with Code", "category": "AI/ML" },
+    { "url": "https://start.me/p/L1rEYQ/osint4all", "name": "OSINT4ALL", "category": "Research" },
+    { "url": "https://independent.prose.md/", "name": "The Independent 100", "category": "Tech" },
+    { "url": "https://getartcraft.com/", "name": "ArtCraft", "category": "Art" },
+    { "url": "https://hft.md/jane-street/", "name": "Jane Street Resources", "category": "Finance" }
   ]
 }
