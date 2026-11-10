@@ -44,6 +44,10 @@
       /* hairline rules */
       --max-measure: 70ch;
       /* comfortable line length */
+      --font-prose: Charter, Constantia, "Palatino Linotype", Palatino, Georgia, serif;
+      --font-apparatus: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --margin-col: 5.5rem;
+      /* width of the left metadata margin */
       --accent-soft: rgba(0, 119, 204, 0.08);
       --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.09);
       --radius: 12px;
@@ -102,7 +106,7 @@
       margin: 0;
       color: var(--ink);
       background: var(--bg);
-      font-family: Charter, Constantia, "Palatino Linotype", Palatino, Georgia, serif;
+      font-family: var(--font-prose);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
@@ -233,11 +237,48 @@
       margin: 0 0 .5rem;
     }
 
+    /* Page headers carry a mono folio in the left margin */
+    .page > header {
+      position: relative;
+      margin-bottom: 1.75rem;
+      padding-bottom: .75rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .page > header::before {
+      content: attr(data-folio);
+      position: absolute;
+      left: calc(-1 * (var(--margin-col) + 1.5rem));
+      top: .7rem;
+      width: var(--margin-col);
+      text-align: right;
+      font-family: var(--font-apparatus);
+      font-size: .7rem;
+      letter-spacing: .08em;
+      color: var(--muted);
+      opacity: .6;
+      font-variant: normal;
+    }
+
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.1rem;
       margin: 2rem 0 .5rem;
+      font-weight: 700;
+      font-variant: small-caps;
+      letter-spacing: .06em;
       border-bottom: 1px solid var(--rule);
       padding-bottom: .3rem;
+    }
+
+    /* The folio only has room to sit outside the measure on wide screens */
+    @media (max-width: 1100px) {
+      .page > header::before {
+        position: static;
+        display: block;
+        width: auto;
+        text-align: left;
+        margin-bottom: .35rem;
+      }
     }
 
     h3 {
@@ -264,10 +305,24 @@
       margin: 2rem 0;
     }
 
-    /* Blog */
+    /* ===== Apparatus voice =====
+       Metadata (dates, indices, tags, domains) is set in mono and lives in the
+       left margin, so the serif measure carries prose only. */
+    .apparatus {
+      font-family: var(--font-apparatus);
+      font-size: .7rem;
+      letter-spacing: .04em;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Blog — margin-note layout */
     .blog-post {
+      display: grid;
+      grid-template-columns: var(--margin-col) minmax(0, 1fr);
+      gap: 0 1.5rem;
       border-bottom: 1px solid var(--rule);
-      margin-bottom: 2rem;
+      margin-bottom: 1.75rem;
       padding-bottom: 1.5rem;
     }
 
@@ -276,14 +331,21 @@
       margin-bottom: 0;
     }
 
-    .blog-meta {
-      color: var(--muted);
-      font-size: .9rem;
-      margin-bottom: .5rem;
+    .blog-margin {
+      text-align: right;
+      padding-top: .35rem;
+      line-height: 1.5;
+    }
+
+    .blog-margin .idx {
+      display: block;
+      margin-top: .5rem;
+      opacity: .65;
     }
 
     .blog-post h3 {
-      margin-bottom: .25rem;
+      margin: 0 0 .2rem;
+      font-size: 1.25rem;
     }
 
     .blog-post h3 a {
@@ -298,12 +360,13 @@
 
     .blog-excerpt {
       color: var(--muted);
-      margin: .4rem 0 .6rem;
+      margin: .3rem 0 .5rem;
     }
 
     .read-more {
-      font-size: .9rem;
-      font-weight: 600;
+      font-family: var(--font-apparatus);
+      font-size: .72rem;
+      letter-spacing: .04em;
       display: inline-block;
       transition: transform .2s var(--ease);
     }
@@ -314,23 +377,56 @@
     }
 
     .blog-tags {
-      margin-top: .75rem;
+      margin-top: .6rem;
+      font-family: var(--font-apparatus);
+      font-size: .7rem;
+      letter-spacing: .04em;
+      color: var(--muted);
     }
 
     .tag {
       display: inline-block;
-      background: var(--rule);
       color: var(--muted);
-      padding: .15rem .4rem;
-      border-radius: .2rem;
-      font-size: .8rem;
-      margin-right: .3rem;
-      margin-bottom: .3rem;
+    }
+
+    .tag + .tag::before {
+      content: "·";
+      margin: 0 .45em;
+      opacity: .6;
+    }
+
+    /* Post page: date/permalink line reads as apparatus, not prose */
+    #blog-post-content .blog-meta {
+      font-family: var(--font-apparatus);
+      font-size: .72rem;
+      letter-spacing: .04em;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
     }
 
     .back-link {
       margin-bottom: 1.5rem;
-      font-size: .9rem;
+      font-family: var(--font-apparatus);
+      font-size: .72rem;
+      letter-spacing: .04em;
+    }
+
+    @media (max-width: 600px) {
+      .blog-post {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .blog-margin {
+        text-align: left;
+        padding-top: 0;
+        margin-bottom: .4rem;
+      }
+
+      .blog-margin .idx {
+        display: inline;
+        margin-left: .6rem;
+      }
     }
 
     /* Projects */
@@ -338,14 +434,87 @@
       margin: 0;
     }
 
+    /* Projects & Experience share the margin-note grid */
+    .projects dl,
+    #exp {
+      display: grid;
+      grid-template-columns: var(--margin-col) minmax(0, 1fr);
+      gap: 0 1.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
     .projects dt {
+      grid-column: 2;
       font-weight: 600;
       font-size: 1rem;
     }
 
     .projects dd {
+      grid-column: 2;
       margin: 0 0 1.2rem 0;
       color: var(--muted);
+    }
+
+    /* The index number sits in the margin, aligned with its title */
+    .projects dt::before {
+      content: attr(data-idx);
+      position: absolute;
+      transform: translateX(calc(-1 * (var(--margin-col) + 1.5rem)));
+      width: var(--margin-col);
+      text-align: right;
+      font-family: var(--font-apparatus);
+      font-size: .7rem;
+      font-weight: 400;
+      letter-spacing: .04em;
+      color: var(--muted);
+      opacity: .65;
+      padding-top: .3rem;
+    }
+
+    #exp li {
+      display: contents;
+    }
+
+    #exp .exp-when {
+      grid-column: 1;
+      text-align: right;
+      padding-top: .15rem;
+    }
+
+    #exp .exp-what {
+      grid-column: 2;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 600px) {
+
+      .projects dl,
+      #exp {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .projects dt,
+      .projects dd,
+      #exp .exp-when,
+      #exp .exp-what {
+        grid-column: 1;
+      }
+
+      .projects dt::before {
+        position: static;
+        transform: none;
+        display: block;
+        width: auto;
+        text-align: left;
+        padding-top: 0;
+      }
+
+      #exp .exp-when {
+        text-align: left;
+      }
     }
 
     /* Pages */
@@ -378,95 +547,110 @@
 
     /* Search & Filter Section */
     .infoperhour-controls {
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      align-items: center;
+      gap: .75rem;
+      align-items: stretch;
     }
 
     .search-container {
       position: relative;
       width: 100%;
-      max-width: 500px;
     }
 
+    /* A ruled field, not a pill — matches the hairline typography */
     #site-search {
       width: 100%;
-      padding: 1rem 1.5rem;
-      padding-left: 3rem;
-      /* space for icon */
-      font-size: 1.1rem;
-      border: 1px solid var(--rule);
-      border-radius: 99px;
-      /* pill shape */
-      background: rgba(255, 255, 255, 0.5);
-      /* glass effect base */
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      font-family: inherit;
+      padding: .5rem 0 .5rem 1.6rem;
+      font-size: 1rem;
+      border: 0;
+      border-bottom: 1px solid var(--rule);
+      border-radius: 0;
+      background: transparent;
+      transition: border-color .2s var(--ease);
+      font-family: var(--font-prose);
       color: var(--ink);
       box-sizing: border-box;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    #site-search::placeholder {
+      color: var(--muted);
+      opacity: .7;
     }
 
     /* Search Icon */
     .search-icon {
       position: absolute;
-      left: 1.2rem;
+      left: 0;
       top: 50%;
       transform: translateY(-50%);
-      opacity: 0.5;
+      opacity: 0.45;
       pointer-events: none;
-      width: 1.2rem;
-      height: 1.2rem;
+      width: 1rem;
+      height: 1rem;
     }
 
     #site-search:focus {
       outline: none;
-      border-color: var(--link);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      background: var(--bg);
+      border-color: var(--ink);
     }
 
-    /* Category Filters */
+    /* Category filters as a mono keyword rail, not buttons */
     .category-filters {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 0.5rem;
+      gap: .1rem 0;
+      align-items: baseline;
     }
 
     .category-btn {
       background: transparent;
-      border: 1px solid var(--rule);
-      padding: 0.4rem 0.8rem;
-      border-radius: 99px;
+      border: 0;
+      padding: .15rem 0;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-family: var(--font-apparatus);
+      font-size: .68rem;
+      letter-spacing: .03em;
       color: var(--muted);
-      transition: all 0.2s;
-      font-family: inherit;
+      transition: color .15s linear;
+      line-height: 1.6;
+    }
+
+    .category-btn:not(:last-child)::after {
+      content: "·";
+      margin: 0 .5em;
+      opacity: .45;
     }
 
     .category-btn:hover {
-      background: var(--rule);
       color: var(--ink);
     }
 
     .category-btn.active {
-      background: var(--link);
-      border-color: var(--link);
-      color: #fff;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: .25em;
+      text-decoration-thickness: .08em;
+    }
+
+    .category-btn.active::after {
+      font-weight: 400;
+      text-decoration: none;
+      display: inline-block;
     }
 
     .infoperhour-description {
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-      background: var(--rule);
-      border-radius: 8px;
-      border-left: 4px solid var(--link);
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--rule);
+      color: var(--muted);
+      max-width: var(--max-measure);
+    }
+
+    .infoperhour-description p {
+      margin: 0;
     }
 
     /* Loading State */
@@ -477,93 +661,102 @@
       font-style: italic;
     }
 
-    /* Grid & Tiles */
+    /* ===== Infoperhour: a typographic index, not a card grid =====
+       Rows of hairline-ruled entries: favicon mark, name in prose voice,
+       domain and category in the apparatus voice, aligned in columns. */
     .website-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      /* slightly wider for favicons */
-      gap: 1.5rem;
-      margin: 2rem auto;
-      padding: 0 .5rem;
-      box-sizing: border-box;
+      margin: 1.5rem 0 0;
+      border-top: 1px solid var(--rule);
+      /* Reserve row height so filtering doesn't reflow the page */
+      contain: layout style;
     }
 
     .website-tile {
-      aspect-ratio: auto;
-      /* Allow flexible height */
-      min-height: 140px;
-      border: 1px solid var(--rule);
-      border-radius: 12px;
-      padding: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      text-align: center;
-      background: var(--bg);
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: grid;
+      grid-template-columns: 1.1rem minmax(0, 1fr) minmax(0, 14rem) 7.5rem;
+      align-items: baseline;
+      gap: 0 .85rem;
+      padding: .5rem .35rem;
+      border-bottom: 1px solid var(--rule);
       text-decoration: none;
       color: var(--ink);
-      box-sizing: border-box;
-      position: relative;
-      overflow: hidden;
+      transition: background .12s linear;
+      /* Skip layout/paint for offscreen rows; the size hint keeps the
+         scrollbar honest so skipping doesn't cause jumpy scrolling. */
+      content-visibility: auto;
+      contain-intrinsic-size: auto 2.1rem;
     }
 
-    /* Premium Hover Effect */
     .website-tile:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-      border-color: var(--link);
+      background: var(--accent-soft);
+      text-decoration: none;
     }
 
-    .website-tile:active {
-      transform: translateY(-1px);
+    .website-tile:visited {
+      color: var(--ink);
     }
 
     .website-icon {
-      width: 32px;
-      height: 32px;
-      margin-bottom: 0.8rem;
-      border-radius: 6px;
+      width: 16px;
+      height: 16px;
       object-fit: contain;
-      background: #fafafa;
-      /* light bg for transparent icons */
-      padding: 2px;
+      align-self: center;
+      border-radius: 3px;
+    }
+
+    .website-name {
+      font-size: .95rem;
+      line-height: 1.35;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .website-tile:hover .website-name {
+      color: var(--link);
+    }
+
+    .website-url,
+    .website-category {
+      font-family: var(--font-apparatus);
+      font-size: .68rem;
+      letter-spacing: .03em;
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .website-category {
+      text-align: right;
+      opacity: .75;
     }
 
     @media (prefers-color-scheme: dark) {
-      .website-icon {
-        background: #333;
-      }
-
       #site-search {
         background: rgba(255, 255, 255, 0.05);
       }
     }
 
-    .website-name {
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 0.3rem;
-      line-height: 1.3;
+    /* Narrow: drop the domain column, then the category */
+    @media (max-width: 900px) {
+      .website-tile {
+        grid-template-columns: 1.1rem minmax(0, 1fr) 7rem;
+      }
+
+      .website-url {
+        display: none;
+      }
     }
 
-    .website-category {
-      font-size: 0.75rem;
-      color: var(--link);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.5rem;
-      opacity: 0.8;
-    }
+    @media (max-width: 560px) {
+      .website-tile {
+        grid-template-columns: 1.1rem minmax(0, 1fr);
+      }
 
-    .website-url {
-      font-size: 0.75rem;
-      color: var(--muted);
-      word-break: break-all;
-      line-height: 1.2;
-      opacity: 0.7;
+      .website-category {
+        display: none;
+      }
     }
 
     /* Footer */
@@ -834,7 +1027,7 @@
     <main id="main-content" tabindex="-1">
       <!-- About -->
       <article class="page active" id="about-page">
-        <header>
+        <header data-folio="I">
           <h1>Saptarshi Samanta</h1>
           <p class="muted">GTM at <em>HackerRank</em></p>
         </header>
@@ -870,7 +1063,7 @@
 
       <!-- Projects -->
       <article class="page" id="projects-page">
-        <header>
+        <header data-folio="II">
           <h1>Projects</h1>
           <p class="muted small">A selection; see repositories for full list.</p>
         </header>
@@ -881,7 +1074,7 @@
 
       <!-- Experience -->
       <article class="page" id="experience-page">
-        <header>
+        <header data-folio="III">
           <h1>Experience</h1>
         </header>
         <section>
@@ -891,7 +1084,7 @@
 
       <!-- Infoperhour -->
       <article class="page" id="infoperhour-page">
-        <header>
+        <header data-folio="IV">
           <h1>Infoperhour</h1>
         </header>
         <section>
@@ -923,7 +1116,7 @@
 
       <!-- Blog -->
       <article class="page" id="blog-page">
-        <header>
+        <header data-folio="V">
           <h1>Blog</h1>
           <p class="muted">Thoughts on technology, selling to engineers, and building things.</p>
         </header>
@@ -938,7 +1131,7 @@
 
       <!-- Contact -->
       <article class="page" id="contact-page">
-        <header>
+        <header data-folio="VI">
           <h1>Contact</h1>
         </header>
         <section>
@@ -1028,6 +1221,7 @@
     };
     function showPage(key, title) {
       document.title = title || PAGE_TITLES[key] || PAGE_TITLES.about;
+      if (key === 'infoperhour') initInfoperhour();
       $$('.page').forEach(p => p.classList.remove('active'));
       const el = document.getElementById(`${key}-page`);
       if (el) el.classList.add('active');
@@ -1076,23 +1270,28 @@
       const yr = $('#year'); if (yr) yr.textContent = y;
     }
     function renderProjects() {
-      const dl = $('#plist'); dl.innerHTML = '';
-      PROJECTS.forEach(p => {
-        const dt = document.createElement('dt');
-        dt.innerHTML = `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>${p.extra ? ` · <a href="${p.extraLink}" target="_blank" rel="noopener">${p.extra}</a>` : ''}`;
-        const dd = document.createElement('dd'); dd.textContent = p.desc;
-        dl.append(dt, dd);
-      });
+      const dl = $('#plist');
+      dl.innerHTML = PROJECTS.map((p, i) => `
+        <dt data-idx="${String(i + 1).padStart(2, '0')}"><a href="${esc(p.link)}" target="_blank" rel="noopener">${esc(p.title)}</a>${p.extra ? ` · <a href="${esc(p.extraLink)}" target="_blank" rel="noopener">${esc(p.extra)}</a>` : ''}</dt>
+        <dd>${esc(p.desc)}</dd>
+      `).join('');
     }
     function renderExperience() {
-      const ul = $('#exp'); ul.innerHTML = '';
-      EXPERIENCE.forEach(j => {
-        const li = document.createElement('li');
-        li.textContent = `${j.role} — ${j.org} (${j.when})`;
-        ul.appendChild(li);
-      });
+      const ul = $('#exp');
+      ul.innerHTML = EXPERIENCE.map(j => `
+        <li>
+          <div class="exp-when apparatus">${esc(j.when)}</div>
+          <div class="exp-what">${esc(j.role)} — ${esc(j.org)}</div>
+        </li>
+      `).join('');
     }
+    // Only fetch the 230-entry link list when Infoperhour is actually opened,
+    // and only once. Most visits never reach this page.
+    let infoperhourLoaded = false;
     async function initInfoperhour() {
+      if (infoperhourLoaded) return;
+      infoperhourLoaded = true;
+
       const grid = $('#website-grid');
       const loader = $('#loading-state');
 
@@ -1105,8 +1304,10 @@
         WEBSITES = data.websites
           .map(s => {
             let domain = '';
-            try { domain = new URL(s.url).hostname; } catch (_) { /* invalid url */ }
-            return { ...s, domain };
+            try { domain = new URL(s.url).hostname.replace(/^www\./, ''); } catch (_) { /* invalid url */ }
+            // Precompute the lowercased haystack once so keystroke filtering
+            // is a single substring test per row.
+            return { ...s, domain, search: `${s.name} ${s.url}`.toLowerCase() };
           })
           .filter(s => s.domain) // drop invalid urls up front
           .sort((a, b) => a.name.localeCompare(b.name));
@@ -1164,81 +1365,67 @@
       const input = $('#site-search');
       if (!input) return;
 
-      input.addEventListener('input', (e) => handleFilter(e.target.value));
+      // Debounce: typing fires input per keystroke, but re-rendering 230+ rows
+      // on every one is wasted work. One frame of delay is imperceptible.
+      let timer = 0;
+      input.addEventListener('input', (e) => {
+        const value = e.target.value;
+        clearTimeout(timer);
+        timer = setTimeout(() => handleFilter(value), 120);
+      });
     }
 
     function handleFilter(query = $('#site-search').value) {
-      const q = query.toLowerCase();
+      const q = query.trim().toLowerCase();
 
-      FILTERED_SITES = WEBSITES.filter(site => {
-        const matchesSearch = site.name.toLowerCase().includes(q) || site.url.toLowerCase().includes(q);
-        const matchesCat = currentCategory === 'All' || site.category === currentCategory;
-        return matchesSearch && matchesCat;
-      });
+      // search/domain fields are pre-lowercased once at load, so filtering is
+      // a plain substring scan rather than 2 × toLowerCase() per row per key.
+      FILTERED_SITES = WEBSITES.filter(site =>
+        (currentCategory === 'All' || site.category === currentCategory) &&
+        (!q || site.search.includes(q))
+      );
 
       renderWebsites(FILTERED_SITES);
     }
 
-    // Lazily swap data-src -> src as tiles approach the viewport, so we don't
-    // fire hundreds of favicon requests on load. Falls back to eager loading
-    // if IntersectionObserver is unavailable.
-    let faviconObserver = null;
-    if ('IntersectionObserver' in window) {
-      faviconObserver = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          const img = entry.target;
-          if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
-          obs.unobserve(img);
-        });
-      }, { rootMargin: '200px' });
-    }
-
     function renderWebsites(list) {
       const grid = $('#website-grid');
-      grid.innerHTML = '';
 
       if (list.length === 0) {
-        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:var(--muted); padding:2rem;">No websites found matching your criteria.</div>';
+        grid.innerHTML = '<p class="muted" style="padding:1.5rem .35rem">No websites found matching your criteria.</p>';
         return;
       }
 
-      const frag = document.createDocumentFragment();
-      list.forEach(site => {
-        const domain = site.domain;
-        if (!domain) return;
-        const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
-
-        const a = document.createElement('a');
-        a.href = site.url;
-        a.target = '_blank';
-        a.rel = 'noopener';
-        a.className = 'website-tile';
-
-        const eager = !faviconObserver;
-        a.innerHTML = `
-          <img class="website-icon" ${eager ? 'src' : 'data-src'}="${faviconUrl}" alt="" loading="lazy" onerror="this.style.opacity=0">
-          ${site.category ? `<div class="website-category">${esc(site.category)}</div>` : ''}
-          <div class="website-name">${esc(site.name)}</div>
-          <div class="website-url">${esc(domain)}</div>
-        `;
-        if (faviconObserver) faviconObserver.observe(a.querySelector('img'));
-        frag.appendChild(a);
-      });
-      grid.appendChild(frag);
+      // One string build + one parse beats 230 createElement/appendChild
+      // cycles. Native loading="lazy" handles deferring the favicon requests,
+      // and content-visibility (set in CSS) skips layout for offscreen rows.
+      grid.innerHTML = list.map(site => `<a class="website-tile" href="${esc(site.url)}" target="_blank" rel="noopener">`
+        + `<img class="website-icon" src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(site.domain)}&sz=32" alt="" width="16" height="16" loading="lazy" decoding="async">`
+        + `<span class="website-name">${esc(site.name)}</span>`
+        + `<span class="website-url">${esc(site.domain)}</span>`
+        + `<span class="website-category">${esc(site.category || '')}</span>`
+        + `</a>`).join('');
     }
     function renderBlogList() {
       const list = $('#blog-list');
       const posts = [...BLOG_POSTS].sort((a, b) => new Date(b.date) - new Date(a.date));
-      list.innerHTML = posts.map(p => `
+      list.innerHTML = posts.map((p, i) => {
+        const [y, m, d] = String(p.date || '').split('-');
+        return `
         <div class="blog-post">
-          <h3><a href="#post-${p.id}">${esc(p.title)}</a></h3>
-          <div class="blog-meta"><time datetime="${esc(p.date)}">${new Date(p.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time></div>
-          <div class="blog-excerpt">${esc(p.excerpt)}</div>
-          <a href="#post-${p.id}" class="read-more">Read more →</a>
-          <div class="blog-tags">${(p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+          <div class="blog-margin apparatus">
+            <time datetime="${esc(p.date)}">${esc(y || '')}<br>${esc(m || '')}.${esc(d || '')}</time>
+            <span class="idx">${String(i + 1).padStart(2, '0')}</span>
+          </div>
+          <div>
+            <h3><a href="#post-${p.id}">${esc(p.title)}</a></h3>
+            <div class="blog-excerpt">${esc(p.excerpt)}</div>
+            <a href="#post-${p.id}" class="read-more">Read more →</a>
+            <div class="blog-tags">${(p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+          </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
     }
     async function showBlogPost(id) {
       const post = BLOG_POSTS.find(p => p.id === parseInt(id));
@@ -1275,13 +1462,19 @@
     // --- Init ---
     document.addEventListener('DOMContentLoaded', () => {
       renderMeta(); renderProjects(); renderExperience(); // renderBlogList removed (called by init)
-      initInfoperhour(); // async fetch
       initBlog(); // async fetch blog
+      // Infoperhour loads lazily — see handleHash / showPage.
 
       $$('.nav-link').forEach(a => a.addEventListener('click', e => {
         const href = a.getAttribute('href');
         if (href && href.startsWith('#')) { e.preventDefault(); window.location.hash = href; }
       }));
+
+      // Warm the link list on intent, so opening Infoperhour feels instant.
+      $$('a[href="#infoperhour"]').forEach(a => {
+        ['pointerenter', 'focus'].forEach(ev =>
+          a.addEventListener(ev, () => initInfoperhour(), { once: true, passive: true }));
+      });
       const btt = document.getElementById('back-to-top');
       if (btt) btt.addEventListener('click', e => {
         e.preventDefault();
