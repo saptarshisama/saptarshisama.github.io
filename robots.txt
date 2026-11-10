@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+# Raw post fragments (front matter + partial HTML) and the JSON index are
+# app data, not pages. The crawlable versions live at /blog/<slug>.html.
+Disallow: /blog/posts/
+Disallow: /blog/index.json
+
+Sitemap: https://saptarshisama.github.io/sitemap.xml

@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Local dev artifacts
+http-server.log
+*.log
+
+# OS / misc
+.cache/
+
+# Local tooling
+.claude/

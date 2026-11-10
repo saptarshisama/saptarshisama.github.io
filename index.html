@@ -1,166 +1,783 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Saptarshi Samanta — Portfolio</title>
-  <meta name="description" content="Personal portfolio of Saptarshi Samanta: projects, notes, and contact." />
+  <meta name="description" content="Personal portfolio of Saptarshi Samanta: projects, notes, a curated reading list, and a blog." />
   <meta name="author" content="Saptarshi Samanta" />
+  <link rel="canonical" href="https://saptarshisama.github.io/" />
+  <meta name="theme-color" content="#fffff8" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0e0e0e" media="(prefers-color-scheme: dark)" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Saptarshi Samanta — Portfolio" />
+  <meta property="og:description" content="Projects, notes, a curated reading list, and a blog." />
+  <meta property="og:url" content="https://saptarshisama.github.io/" />
+  <meta property="og:site_name" content="Saptarshi Samanta" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Saptarshi Samanta — Portfolio" />
+  <meta name="twitter:description" content="Projects, notes, a curated reading list, and a blog." />
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Saptarshi Samanta","url":"https://saptarshisama.github.io/","sameAs":["https://github.com/saptarshisama","https://www.linkedin.com/in/saptarshisama/"],"worksFor":{"@type":"Organization","name":"HackerRank"}}</script>
+
+  <!-- Inline SVG favicon (monogram, no extra request) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23111'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='700' fill='%23fffff8' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E" />
+
+  <!-- Preconnect to the favicon CDN used by Infoperhour -->
+  <link rel="preconnect" href="https://www.google.com" />
   <style>
     /* ===== Theme ===== */
-    :root{
-      --bg: #fffff8;          /* warm white */
-      --ink: #111;            /* near-black text */
-      --muted: #555;          /* secondary text */
-      --link: #07c;           /* calm blue links */
+    :root {
+      --bg: #fffff8;
+      /* warm white */
+      --ink: #111;
+      /* near-black text */
+      --muted: #555;
+      /* secondary text */
+      --link: #07c;
+      /* calm blue links */
       --link-visited: #551a8b;
-      --rule: #e6e4de;        /* hairline rules */
-      --max-measure: 70ch;    /* comfortable line length */
+      --rule: #e6e4de;
+      /* hairline rules */
+      --max-measure: 70ch;
+      /* comfortable line length */
+      --accent-soft: rgba(0, 119, 204, 0.08);
+      --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.09);
+      --radius: 12px;
+      --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
     }
-    @media (prefers-color-scheme: dark){
-      :root{
-        --bg:#0e0e0e;
-        --ink:#e6e6e6;
-        --muted:#b3b3b3;
-        --link:#7db0ff;
-        --link-visited:#c39cff;
-        --rule:#242424;
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0e0e0e;
+        --ink: #e6e6e6;
+        --muted: #b3b3b3;
+        --link: #7db0ff;
+        --link-visited: #c39cff;
+        --rule: #242424;
+        --accent-soft: rgba(125, 176, 255, 0.12);
+        --shadow-md: 0 12px 28px rgba(0, 0, 0, 0.5);
       }
     }
-    html{ font-size:17px; }
-    body{
-      margin:0; color:var(--ink); background:var(--bg);
+
+    html {
+      font-size: 17px;
+      scroll-behavior: smooth;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    /* Respect users who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Visible focus ring for keyboard users only */
+    :focus-visible {
+      outline: 2px solid var(--link);
+      outline-offset: 2px;
+      border-radius: 3px;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
       font-family: Charter, Constantia, "Palatino Linotype", Palatino, Georgia, serif;
-      line-height:1.65; -webkit-font-smoothing: antialiased;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
-    a{ color:var(--link); text-decoration:none; }
-    a:visited{ color:var(--link-visited); }
-    a:hover{ text-decoration: underline; text-underline-offset:.15em; text-decoration-thickness:.06em; }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: var(--link-visited);
+    }
+
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: .15em;
+      text-decoration-thickness: .06em;
+    }
 
     /* ===== Centered Layout (geohot-ish) ===== */
-    .container{
-      max-width: 1200px;     /* keeps equal margins on big screens */
-      margin: 0 auto;        /* centers the whole site */
-      padding: 0 2rem;       /* boundary space so tiles never touch edges */
+    .container {
+      max-width: 1200px;
+      /* keeps equal margins on big screens */
+      margin: 0 auto;
+      /* centers the whole site */
+      padding: 0 2rem;
+      /* boundary space so tiles never touch edges */
       display: grid;
-      grid-template-columns: 240px 1fr; /* left sidebar + centered main */
+      grid-template-columns: 240px 1fr;
+      /* left sidebar + centered main */
       gap: 3rem;
       min-height: 100vh;
     }
 
     /* Sidebar */
-    aside.site{ padding:2rem 0; position:sticky; top:2rem; align-self:start; height:fit-content; }
-    .brand{ font-variant: small-caps; letter-spacing:.5px; font-weight:700; font-size:1.3rem; margin-bottom:.5rem; }
-    .tagline{ color:var(--muted); margin-bottom:2rem; font-size:.95rem; }
-    nav ul{ list-style:none; padding:0; margin:0 0 2rem 0; }
-    nav li{ margin:.4rem 0; }
-    nav a{ display:block; padding:.3rem 0; cursor:pointer; font-size:1rem; }
-    nav a.active{ font-weight:600; color:var(--ink); }
-    .sidebar-meta{ border-top:1px solid var(--rule); padding-top:1rem; font-size:.9rem; }
-    .sidebar-meta>div{ margin:.4rem 0; }
-    .caps{ font-variant: small-caps; letter-spacing:.5px; }
+    aside.site {
+      padding: 2rem 0;
+      position: sticky;
+      top: 2rem;
+      align-self: start;
+      height: fit-content;
+    }
+
+    .brand {
+      font-variant: small-caps;
+      letter-spacing: .5px;
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin-bottom: .5rem;
+    }
+
+    .tagline {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: .95rem;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem 0;
+    }
+
+    nav li {
+      margin: .4rem 0;
+    }
+
+    nav a {
+      display: block;
+      padding: .35rem .6rem;
+      margin-left: -.6rem;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 6px;
+      border-left: 2px solid transparent;
+      transition: background .2s var(--ease), color .2s var(--ease), border-color .2s var(--ease);
+    }
+
+    nav a:hover {
+      text-decoration: none;
+      background: var(--accent-soft);
+    }
+
+    nav a.active {
+      font-weight: 600;
+      color: var(--ink);
+      border-left-color: var(--link);
+      background: var(--accent-soft);
+    }
+
+    .sidebar-meta {
+      border-top: 1px solid var(--rule);
+      padding-top: 1rem;
+      font-size: .9rem;
+    }
+
+    .sidebar-meta>div {
+      margin: .4rem 0;
+    }
+
+    .caps {
+      font-variant: small-caps;
+      letter-spacing: .5px;
+    }
 
     /* Main */
-    main{ padding:2rem 0; }
-    article{ width:100%; max-width:var(--max-measure); margin:0 auto; } /* classic centered read width */
-    h1,h2,h3{ font-weight:700; line-height:1.2; }
-    h1{ font-size:2.2rem; margin:0 0 .5rem; }
-    h2{ font-size:1.5rem; margin:2rem 0 .5rem; border-bottom:1px solid var(--rule); padding-bottom:.3rem; }
-    h3{ font-size:1.2rem; margin:1.5rem 0 .3rem; }
-    p{ margin:.85rem 0; font-size:1rem; }
-    .muted{ color:var(--muted); }
-    .small{ font-size:.9rem; }
-    hr{ border:0; border-top:1px solid var(--rule); margin:2rem 0; }
+    main {
+      padding: 2rem 0;
+    }
+
+    article {
+      width: 100%;
+      max-width: var(--max-measure);
+      margin: 0 auto;
+    }
+
+    /* classic centered read width */
+    h1,
+    h2,
+    h3 {
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      margin: 0 0 .5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin: 2rem 0 .5rem;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: .3rem;
+    }
+
+    h3 {
+      font-size: 1.2rem;
+      margin: 1.5rem 0 .3rem;
+    }
+
+    p {
+      margin: .85rem 0;
+      font-size: 1rem;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .small {
+      font-size: .9rem;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--rule);
+      margin: 2rem 0;
+    }
 
     /* Blog */
-    .blog-post{ border-bottom:1px solid var(--rule); margin-bottom:2rem; padding-bottom:1.5rem; }
-    .blog-post:last-child{ border-bottom:none; margin-bottom:0; }
-    .blog-meta{ color:var(--muted); font-size:.9rem; margin-bottom:.5rem; }
-    .blog-tags{ margin-top:.75rem; }
-    .tag{ display:inline-block; background:var(--rule); color:var(--muted); padding:.15rem .4rem; border-radius:.2rem; font-size:.8rem; margin-right:.3rem; margin-bottom:.3rem; }
-    .back-link{ margin-bottom:1.5rem; font-size:.9rem; }
+    .blog-post {
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .blog-post:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .blog-meta {
+      color: var(--muted);
+      font-size: .9rem;
+      margin-bottom: .5rem;
+    }
+
+    .blog-post h3 {
+      margin-bottom: .25rem;
+    }
+
+    .blog-post h3 a {
+      color: var(--ink);
+      transition: color .2s var(--ease);
+    }
+
+    .blog-post h3 a:hover {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    .blog-excerpt {
+      color: var(--muted);
+      margin: .4rem 0 .6rem;
+    }
+
+    .read-more {
+      font-size: .9rem;
+      font-weight: 600;
+      display: inline-block;
+      transition: transform .2s var(--ease);
+    }
+
+    .read-more:hover {
+      text-decoration: none;
+      transform: translateX(2px);
+    }
+
+    .blog-tags {
+      margin-top: .75rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--rule);
+      color: var(--muted);
+      padding: .15rem .4rem;
+      border-radius: .2rem;
+      font-size: .8rem;
+      margin-right: .3rem;
+      margin-bottom: .3rem;
+    }
+
+    .back-link {
+      margin-bottom: 1.5rem;
+      font-size: .9rem;
+    }
 
     /* Projects */
-    .projects dl{ margin:0; }
-    .projects dt{ font-weight:600; font-size:1rem; }
-    .projects dd{ margin:0 0 1.2rem 0; color:var(--muted); }
+    .projects dl {
+      margin: 0;
+    }
+
+    .projects dt {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .projects dd {
+      margin: 0 0 1.2rem 0;
+      color: var(--muted);
+    }
 
     /* Pages */
-    .page{ display:none; }
-    .page.active{ display:block; }
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+      animation: page-in .35s var(--ease);
+    }
+
+    @keyframes page-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     /* Infoperhour */
     /* Wider canvas than reading width, still centered & symmetric */
-    #infoperhour-page{ max-width: 1200px; }
-    .infoperhour-description{
-      margin-bottom:2rem; padding:1.5rem; background:var(--rule);
-      border-radius:8px; border-left:4px solid var(--link);
+    #infoperhour-page {
+      max-width: 1200px;
     }
-    .website-grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); /* ~6–7 on desktop */
-      gap: 1.2rem;
+
+    /* Search & Filter Section */
+    .infoperhour-controls {
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .search-container {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    #site-search {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      padding-left: 3rem;
+      /* space for icon */
+      font-size: 1.1rem;
+      border: 1px solid var(--rule);
+      border-radius: 99px;
+      /* pill shape */
+      background: rgba(255, 255, 255, 0.5);
+      /* glass effect base */
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      font-family: inherit;
+      color: var(--ink);
+      box-sizing: border-box;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    /* Search Icon */
+    .search-icon {
+      position: absolute;
+      left: 1.2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.5;
+      pointer-events: none;
+      width: 1.2rem;
+      height: 1.2rem;
+    }
+
+    #site-search:focus {
+      outline: none;
+      border-color: var(--link);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      background: var(--bg);
+    }
+
+    /* Category Filters */
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .category-btn {
+      background: transparent;
+      border: 1px solid var(--rule);
+      padding: 0.4rem 0.8rem;
+      border-radius: 99px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .category-btn:hover {
+      background: var(--rule);
+      color: var(--ink);
+    }
+
+    .category-btn.active {
+      background: var(--link);
+      border-color: var(--link);
+      color: #fff;
+    }
+
+    .infoperhour-description {
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--rule);
+      border-radius: 8px;
+      border-left: 4px solid var(--link);
+    }
+
+    /* Loading State */
+    #loading-state {
+      text-align: center;
+      padding: 3rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* Grid & Tiles */
+    .website-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      /* slightly wider for favicons */
+      gap: 1.5rem;
       margin: 2rem auto;
-      padding: 0 .5rem;        /* inner boundary so last column never hugs the edge */
+      padding: 0 .5rem;
       box-sizing: border-box;
     }
-    .website-tile{
-      aspect-ratio:1;
-      border:1px solid var(--rule);
-      border-radius:8px;
-      padding:1rem;
-      display:flex; flex-direction:column; justify-content:center; align-items:center;
-      text-align:center; background:var(--bg);
-      transition: all .2s ease;
-      text-decoration:none; color:var(--ink);
-      box-sizing:border-box;
+
+    .website-tile {
+      aspect-ratio: auto;
+      /* Allow flexible height */
+      min-height: 140px;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      background: var(--bg);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      text-decoration: none;
+      color: var(--ink);
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
     }
-    .website-tile:hover{ transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.1); border-color:var(--link); }
-    .website-name{ font-weight:600; font-size:.85rem; margin-bottom:.5rem; word-break:break-word; line-height:1.2; }
-    .website-url{ font-size:.7rem; color:var(--muted); word-break:break-all; line-height:1.1; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+
+    /* Premium Hover Effect */
+    .website-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--link);
+    }
+
+    .website-tile:active {
+      transform: translateY(-1px);
+    }
+
+    .website-icon {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 0.8rem;
+      border-radius: 6px;
+      object-fit: contain;
+      background: #fafafa;
+      /* light bg for transparent icons */
+      padding: 2px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .website-icon {
+        background: #333;
+      }
+
+      #site-search {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+
+    .website-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+      line-height: 1.3;
+    }
+
+    .website-category {
+      font-size: 0.75rem;
+      color: var(--link);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .website-url {
+      font-size: 0.75rem;
+      color: var(--muted);
+      word-break: break-all;
+      line-height: 1.2;
+      opacity: 0.7;
+    }
 
     /* Footer */
-    footer{ border-top:1px solid var(--rule); margin-top:3rem; padding-top:1rem; color:var(--muted); text-align:center; }
+    footer {
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+      padding-top: 1rem;
+      color: var(--muted);
+      text-align: center;
+    }
 
     /* ===== Mobile: header + retractable menu (surgical add) ===== */
-    .mobile-header{ display:none; position:sticky; top:0; z-index:1000; background:var(--bg); border-bottom:1px solid var(--rule); padding:.75rem 1rem; align-items:center; justify-content:space-between; }
-    .mobile-brand{ font-weight:700; }
-    #menu-toggle{ font-size:1.5rem; line-height:1; background:none; border:none; cursor:pointer; color:var(--ink); }
-    #mobile-menu{ display:none; border-bottom:1px solid var(--rule); background:var(--bg); padding:.75rem 1rem 1rem; }
-    #mobile-menu ul{ list-style:none; margin:0 0 .75rem 0; padding:0; }
-    #mobile-menu li{ margin:.5rem 0; }
-    #mobile-menu a{ color:var(--ink); font-size:1.05rem; }
-    #mobile-menu a:hover{ text-decoration:underline; }
-    .mobile-meta{ font-size:.9rem; color:var(--muted); border-top:1px solid var(--rule); padding-top:.75rem; }
-    .mobile-meta > div{ margin:.35rem 0; }
+    .mobile-header {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      padding: .75rem 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mobile-brand {
+      font-weight: 700;
+    }
+
+    #menu-toggle {
+      font-size: 1.5rem;
+      line-height: 1;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--ink);
+      min-width: 44px;
+      min-height: 44px;
+      /* accessible tap target */
+      border-radius: 8px;
+    }
+
+    #menu-toggle:active {
+      background: var(--accent-soft);
+    }
+
+    #mobile-menu {
+      display: none;
+      border-bottom: 1px solid var(--rule);
+      background: var(--bg);
+      padding: .75rem 1rem 1rem;
+    }
+
+    #mobile-menu ul {
+      list-style: none;
+      margin: 0 0 .75rem 0;
+      padding: 0;
+    }
+
+    #mobile-menu li {
+      margin: 0;
+    }
+
+    #mobile-menu a {
+      color: var(--ink);
+      font-size: 1.05rem;
+      display: block;
+      padding: .7rem .25rem;
+      /* larger tap target */
+      border-radius: 6px;
+    }
+
+    #mobile-menu a:active {
+      background: var(--accent-soft);
+    }
+
+    #mobile-menu a:hover {
+      text-decoration: underline;
+    }
+
+    .mobile-meta {
+      font-size: .9rem;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+      padding-top: .75rem;
+    }
+
+    .mobile-meta>div {
+      margin: .35rem 0;
+    }
 
     /* Responsive */
-    @media (max-width: 1100px){
-      .container{ grid-template-columns: 1fr; max-width: var(--max-measure); }
-      article{ max-width: var(--max-measure); }
-      #infoperhour-page{ max-width: 100%; }
-      .website-grid{ padding: 0 1rem; }
+    @media (max-width: 1100px) {
+      .container {
+        grid-template-columns: 1fr;
+        max-width: var(--max-measure);
+      }
+
+      article {
+        max-width: var(--max-measure);
+      }
+
+      #infoperhour-page {
+        max-width: 100%;
+      }
+
+      .website-grid {
+        padding: 0 1rem;
+      }
     }
-    @media (max-width: 768px){
-      .container{ padding: 0 1rem; }
-      .website-grid{ gap:.75rem; padding:0 .5rem; }
-      h1{ font-size:1.8rem; }
-      .brand{ font-size:1.1rem; }
-      aside.site{ display:none; } /* Hide desktop sidebar on mobile only */
-      .mobile-header{ display:flex; }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 1rem;
+      }
+
+      .website-grid {
+        gap: .75rem;
+        padding: 0 .5rem;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .brand {
+        font-size: 1.1rem;
+      }
+
+      aside.site {
+        display: none;
+      }
+
+      /* Hide desktop sidebar on mobile only */
+      .mobile-header {
+        display: flex;
+      }
+
+      /* Roomier touch targets on mobile */
+      .category-btn {
+        padding: .55rem 1rem;
+        font-size: .9rem;
+      }
+
+      #site-search {
+        font-size: 16px;
+        /* prevents iOS zoom-on-focus */
+      }
+    }
+
+    /* Skip link for keyboard/screen-reader users */
+    .skip-link {
+      position: absolute;
+      left: .5rem;
+      top: -3rem;
+      background: var(--ink);
+      color: var(--bg);
+      padding: .5rem .9rem;
+      border-radius: 6px;
+      z-index: 2000;
+      transition: top .2s var(--ease);
+    }
+
+    .skip-link:focus {
+      top: .5rem;
+      text-decoration: none;
     }
 
     /* Utilities */
-    .sr-only{ position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0; }
-    code,kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:.95em; background:var(--rule); padding:.1em .3em; border-radius:.2em; }
-    pre{ background:var(--rule); padding:1rem; border-radius:.3rem; overflow-x:auto; font-size:.9rem; }
-    pre code{ background:none; padding:0; }
-    blockquote{ border-left:3px solid var(--rule); padding-left:1rem; margin-left:0; color:var(--muted); font-style:italic; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+
+    code,
+    kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: .95em;
+      background: var(--rule);
+      padding: .1em .3em;
+      border-radius: .2em;
+    }
+
+    pre {
+      background: var(--rule);
+      padding: 1rem;
+      border-radius: .3rem;
+      overflow-x: auto;
+      font-size: .9rem;
+    }
+
+    pre code {
+      background: none;
+      padding: 0;
+    }
+
+    blockquote {
+      border-left: 3px solid var(--rule);
+      padding-left: 1rem;
+      margin-left: 0;
+      color: var(--muted);
+      font-style: italic;
+    }
   </style>
 </head>
+
 <body>
   <a id="top" class="sr-only">Top</a>
+  <a href="#main-content" class="skip-link">Skip to content</a>
 
   <!-- Mobile header/menu (added) -->
   <header class="mobile-header" aria-label="Mobile header">
@@ -177,9 +794,12 @@
       <li><a href="#contact" class="nav-link">Contact</a></li>
     </ul>
     <div class="mobile-meta">
-      <div><span class="caps">GitHub</span>: <a id="gh-mobile" href="https://github.com/saptarshisama" target="_blank" rel="noopener">@saptarshisama</a></div>
-      <div><span class="caps">LinkedIn</span>: <a id="li-mobile" href="https://www.linkedin.com/in/saptarshisama/" target="_blank" rel="noopener">My LinkedIn</a></div>
-      <div><span class="caps">Email</span>: <a id="em-mobile" href="mailto:saptarshi.samanta@hackerrank.com">saptarshi.samanta@hackerrank.com</a></div>
+      <div><span class="caps">GitHub</span>: <a id="gh-mobile" href="https://github.com/saptarshisama" target="_blank"
+          rel="noopener">@saptarshisama</a></div>
+      <div><span class="caps">LinkedIn</span>: <a id="li-mobile" href="https://www.linkedin.com/in/saptarshisama/"
+          target="_blank" rel="noopener">My LinkedIn</a></div>
+      <div><span class="caps">Email</span>: <a id="em-mobile"
+          href="mailto:saptarshisamanta@zohomail.in">saptarshisamanta@zohomail.in</a></div>
       <div class="muted" id="updated-mobile">Updated: <time></time></div>
     </div>
   </nav>
@@ -200,15 +820,18 @@
         </ul>
       </nav>
       <div class="sidebar-meta">
-        <div><span class="caps">GitHub</span>: <a id="gh" href="https://github.com/saptarshisama" target="_blank" rel="noopener">@saptarshisama</a></div>
-        <div><span class="caps">LinkedIn</span>: <a id="li" href="https://www.linkedin.com/in/saptarshisama/" target="_blank" rel="noopener">My LinkedIn</a></div>
-        <div><span class="caps">Email</span>: <a id="em" href="mailto:saptarshi.samanta@hackerrank.com">saptarshi.samanta@hackerrank.com</a></div>
+        <div><span class="caps">GitHub</span>: <a id="gh" href="https://github.com/saptarshisama" target="_blank"
+            rel="noopener">@saptarshisama</a></div>
+        <div><span class="caps">LinkedIn</span>: <a id="li" href="https://www.linkedin.com/in/saptarshisama/"
+            target="_blank" rel="noopener">My LinkedIn</a></div>
+        <div><span class="caps">Email</span>: <a id="em"
+            href="mailto:saptarshisamanta@zohomail.in">saptarshisamanta@zohomail.in</a></div>
         <div class="muted" id="updated">Updated: <time></time></div>
       </div>
     </aside>
 
     <!-- Main -->
-    <main>
+    <main id="main-content" tabindex="-1">
       <!-- About -->
       <article class="page active" id="about-page">
         <header>
@@ -216,31 +839,32 @@
           <p class="muted">GTM at <em>HackerRank</em></p>
         </header>
         <section>
-        <h2>About</h2>
-        <p>I’ve always had ideas, but most of them got lost to inaction. This is just a place for me to dump my ideas and half-baked attempts at execution.</p>
+          <h2>About</h2>
+          <p>I’ve always had ideas, but most of them got lost to inaction. This is just a place for me to dump my ideas
+            and half-baked attempts at execution.</p>
 
-        <p>About life, I follow my grandfather’s simple yet effective principle, and it goes something like this:</p>  
-      
-        <blockquote style="font-size:0.9rem;">
-          <p>“জীবন যাত্রায়”</p>
-          <p>“ভোগ থাকবে, লোভ থাকবে না”</p>
-          <p>“স্নেহ থাকবে, মোহ থাকবে না”</p>
-          <p>“দীপ্তি থাকবে, দাহ থাকবে না”</p>
-          <p>“বিকাশ থাকবে, প্রকাশ থাকবে না।”</p>
-        </blockquote>
-      
-        <p>The rough English translation is this</p>
-      
-        <blockquote style="font-size:0.9rem;">
-          <p>“In the journey of life:”</p>
-          <p>“There will be enjoyment, but not greed.”</p>
-          <p>“There will be affection, but not attachment.”</p>
-          <p>“There will be radiance, but not burning pain.”</p>
-          <p>“There will be growth, but not vain display.”</p>
-        </blockquote>
-      
-        <p>Also see <a id="gh2" href="https://github.com/saptarshisama" target="_blank" rel="noopener">GitHub</a>.</p>
-      </section>
+          <p>About life, I follow my grandfather’s simple yet effective principle, and it goes something like this:</p>
+
+          <blockquote style="font-size:0.9rem;">
+            <p>“জীবন যাত্রায়”</p>
+            <p>“ভোগ থাকবে, লোভ থাকবে না”</p>
+            <p>“স্নেহ থাকবে, মোহ থাকবে না”</p>
+            <p>“দীপ্তি থাকবে, দাহ থাকবে না”</p>
+            <p>“বিকাশ থাকবে, প্রকাশ থাকবে না।”</p>
+          </blockquote>
+
+          <p>The rough English translation is this</p>
+
+          <blockquote style="font-size:0.9rem;">
+            <p>“In the journey of life:”</p>
+            <p>“There will be enjoyment, but not greed.”</p>
+            <p>“There will be affection, but not attachment.”</p>
+            <p>“There will be radiance, but not burning pain.”</p>
+            <p>“There will be growth, but not vain display.”</p>
+          </blockquote>
+
+          <p>Also see <a id="gh2" href="https://github.com/saptarshisama" target="_blank" rel="noopener">GitHub</a>.</p>
+        </section>
 
       </article>
 
@@ -257,19 +881,43 @@
 
       <!-- Experience -->
       <article class="page" id="experience-page">
-        <header><h1>Experience</h1></header>
-        <section><ul id="exp" class="small"><!-- populated by JS --></ul></section>
+        <header>
+          <h1>Experience</h1>
+        </header>
+        <section>
+          <ul id="exp" class="small"><!-- populated by JS --></ul>
+        </section>
       </article>
 
       <!-- Infoperhour -->
       <article class="page" id="infoperhour-page">
-        <header><h1>Infoperhour</h1></header>
+        <header>
+          <h1>Infoperhour</h1>
+        </header>
         <section>
           <div class="infoperhour-description">
-            <p>A curated collection of websites I visit regularly for learning, inspiration, and staying up-to-date with technology, programming, and ideas. These are the sources I turn to when I want to absorb quality information and perspectives.</p>
-            <p class="muted small">Click on any tile to visit the website. Each tile represents a valuable resource worth exploring.</p>
+            <p>A curated collection of websites I visit regularly for learning, inspiration, and staying up-to-date with
+              technology, programming, and ideas. These are the sources I turn to when I want to absorb quality
+              information and perspectives.</p>
           </div>
-          <div class="website-grid" id="website-grid"><!-- populated by JS --></div>
+
+          <!-- Search & Filter Controls -->
+          <div class="infoperhour-controls">
+            <div class="search-container">
+              <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input type="text" id="site-search" placeholder="Search websites..." aria-label="Search websites">
+            </div>
+            <div class="category-filters" id="category-filters">
+              <!-- populated by JS -->
+            </div>
+          </div>
+
+          <div id="loading-state">Loading resources...</div>
+          <div class="website-grid" id="website-grid" style="display:none"><!-- populated by JS --></div>
         </section>
       </article>
 
@@ -290,9 +938,16 @@
 
       <!-- Contact -->
       <article class="page" id="contact-page">
-        <header><h1>Contact</h1></header>
-        <section><p>Email <a id="em2" href="mailto:saptarshi.samanta@hackerrank.com">saptarshi.samanta@hackerrank.com</a>. I read everything.</p></section>
-        <footer><p>© <span id="year"></span> Saptarshi Samanta · <a href="#top" class="nav-link">Back to top</a></p></footer>
+        <header>
+          <h1>Contact</h1>
+        </header>
+        <section>
+          <p>Email <a id="em2" href="mailto:saptarshisamanta@zohomail.in">saptarshisamanta@zohomail.in</a>. I
+            read everything.</p>
+        </section>
+        <footer>
+          <p>© <span id="year"></span> Saptarshi Samanta · <a href="#top" id="back-to-top">Back to top</a></p>
+        </footer>
       </article>
     </main>
   </div>
@@ -304,7 +959,6 @@
       email: "saptarshisamanta@zohomail.in",
       github: "saptarshisama",
       linkedin: "saptarshisama",
-      resume: "resume.pdf",
     };
 
     const PROJECTS = [
@@ -318,114 +972,86 @@
       { org: "HackerRank", role: "GTM", when: "July 2025 – Present" },
     ];
 
-    // === FULL Infoperhour list (restored) ===
-    const WEBSITES = [
-      "https://www.gwern.net/","https://www.lesswrong.com/","https://reasonablypolymorphic.com/blog/monotonous-web/index.html","https://dynomight.net/","https://blog.jim-nielsen.com/","https://geohot.github.io/blog/",
-      "http://paulgraham.com/","https://www.notboring.co/","https://news.ycombinator.com/","https://hack.org/mc/","https://erischel.com/","https://thenetworkstate.com/","https://dsebastien.net/blog","https://hackernoon.com/",
-      "https://ljvmiranda921.github.io/","https://tsk.bearblog.dev/","https://www.doodles.dev/","https://manishearth.github.io/","https://peabee.substack.com/archive?sort=new","https://crinacle.com/","https://dukope.com/devlogs/",
-      "https://dukope.com","https://twitter.com/dukope","http://blog.computationalcomplexity.org/","https://alwaysasking.com/","https://karpathy.github.io/","https://alinpanaitiu.com/","https://astralcodexten.substack.com/",
-      "https://www.piratewires.com/","https://amasad.me/","https://blog.samaltman.com/","https://borretti.me/article/","https://invertedpassion.com/","https://asianometry.substack.com/","https://softwareengineeringdaily.com/",
-      "https://25iq.com/","https://randalolson.com/blog","https://effectiveaccelerationism.substack.com/","http://ggml.ai/","https://newcriterion.com/","https://arxiv.org/a/taleb_n_1.html","https://nassimtaleb.org/category/writing/","https://www.latent.space/",
-      "http://www.incompleteideas.net/","https://palmerluckey.com/","https://www.righto.com/","https://www.stephenwolfram.com/","https://engineering.fb.com/","https://jmmv.dev/essays.html","https://arstechnica.com/","https://gregbrockman.com/","https://rekt.news/",
-      "https://soumith.ch/","https://www.realityslaststand.com/","https://ai.stanford.edu/courses/","https://nadh.in/","http://localroger.com/","https://www.unqualified-reservations.org/2008/04/open-letter-to-open-minded-progressives/","https://ranprieur.com/essays.html",
-      "http://www.catb.org/~esr/faqs/hacker-howto.html","https://web.archive.org/web/20070613184827/http://yudkowsky.net/singularity.html","https://research.google/","https://sohl-dickstein.github.io/","https://netflixtechblog.com/",
-      "https://longstreet.typepad.com/thesciencebookstore/","https://tracy.posthaven.com/","https://jorgenveisdal.medium.com/","https://skalskip.medium.com/","http://prize.hutter1.net/hfaq.htm","https://www.asianometry.com/archive","https://www.svpg.com/articles/",
-      "https://marcellus.in/newsletter-archives/","https://book.premai.io/state-of-open-source-ai/mlops-engines/","https://medisearch.io/","https://annas-blog.org/duxiu-exclusive.html","https://writings.stephenwolfram.com/",
-      "https://wolframphysics.org/","https://www.spytalk.co/","http://fullafterburner.weebly.com/","https://mathshistory.st-andrews.ac.uk/","https://idrw.org/","http://opendatastructures.org/","https://space.skyrocket.de/index.html",
-      "https://www.russianspaceweb.com/index.html","https://supyo.xyz/","https://b14643.eu/","http://www.astronautix.com/","https://archive.org/details/conversations-with-the-crow-pdf/page/n5/mode/2up","https://www.perplexity.ai/discover","https://wtfhappenedin1971.com/",
-      "https://wimflyc.blogspot.com/2021/01/the-henry-adams-curve-closer-look.html","https://a16z.com/news-content/","https://graymirror.substack.com/","https://www.cs.ucdavis.edu/~koehl/Teaching/ECS188/PDF_files/Machine_stops.pdf","https://awaisahmed.substack.com/",
-      "https://bharatshakti.in/","https://www.marginalia.nu/","https://hrmacbeth.github.io/math2001/index.html","https://simon.peytonjones.org/","https://www.berkshirehathaway.com/letters/letters.html","https://truthseekermusings.beehiiv.com/",
-      "http://incompleteideas.net/","https://adammaj.com/books","https://tessellatum.in/","https://justine.lol/index.html","https://fsturmat.net/blog/","https://ajkprojects.com/","https://mesozoic-egg.github.io/tinygrad-notes/","https://www.aitoppicks.com/",
-      "https://explorer.globe.engineer/","https://folklore.org/","https://venturehacks.com/","https://www.ryanhoover.me/writing","https://annas-archive.org/","https://www.jasoncarman.com/","https://arc.net/e/D242E263-31FD-4CF9-A2D5-B67519C049AF",
-      "https://thevalleyofcode.com/","https://s2.q4cdn.com/299287126/files/doc_financials/annual/Amazon_Shareholder_Letter.pdf","https://twobithistory.org/","https://lelouch.dev/","https://pallavaggarwal.in/","https://owickstrom.github.io/the-monospace-web/#the-basics",
-      "https://amansanger.com/","https://nousresearch.com/","https://habitualized.com/","https://oggy.sh/chamber.html","https://www.inference.net/","https://darioamodei.com/","https://medium.com/@dipamp_34109","https://generative.ink/posts/","https://ia.samaltman.com/",
-      "https://www.dwarkeshpatel.com/","https://www.semianalysis.com/","https://phrack.org/","https://darknetdiaries.com/","https://planetscale.com/","https://kartsci.org/kocomu/computer-history/graphical-user-interface-history/","https://vin.gg/","https://kayg.org/",
-      "https://poeticengineering.substack.com/","https://tokin.tv/","https://www.matthewsiu.com/","https://en.app/","https://openrouter.ai/","https://www.plasticlist.org/","https://bbycroft.net/llm","https://nextspaceflight.com/","https://lmarena.ai/","https://www.arxival.xyz/",
-      "https://www.swebench.com/","https://press.stripe.com/","https://www.are.na/maxim-leyzerovich/simulation-tools","https://www.fast.ai/","https://www.agentrecipes.com/","https://americanaffairsjournal.org/2021/08/the-value-of-nothing-capital-versus-growth/","https://horace.io/",
-      "https://github.com/agno-agi/agno","https://supaiku.com/","https://karpathy.bearblog.dev/","https://www.made-in-china.com/","https://github.com/punkpeye/awesome-mcp-servers","https://www.techemails.com/", "https://blog.wilsonl.in/",
-      "https://satellitemap.space/", "https://rmurai.co.uk/", "https://kavan010.github.io/kavan/", "https://www.offgridai.us/", "https://caseyhandmer.wordpress.com/", "https://kaliassistant.github.io/", "https://www.bhoite.com/",
-      "https://www.pizzint.watch/", "https://ryolu.notion.site/how-to-make-something-great", "https://tspasemiconductor.substack.com/", "https://pliny.gg/", "https://web.mit.edu/slava/space/index.htm", "https://worksinprogress.co/",
-      "https://mtlynch.io/", "https://thehustle.co/", "https://grugbrain.dev/", "https://www.jeffgeerling.com/", "https://owickstrom.github.io/the-monospace-web/", "https://www.julian.ac/now/", "https://wickstrom.tech/",
-      "https://mattparlmer.substack.com/", "https://github.com/github/spec-kit", "https://lightpollutionmap.app/", "https://www.surveillancewatch.io/", "https://tjukanovt.github.io/notable-people", "https://origamisimulator.org/",
-      "https://geodienst.github.io/lighthousemap/"
-    ];
+    // === Infoperhour (Dynamic) ===
+    let WEBSITES = [];        // Stores the full list of objects: {url, name, category}
+    let FILTERED_SITES = [];  // Stores currently visible sites
+    let CATEGORIES = new Set();
+    let currentCategory = 'All';
 
-    // Blog posts (filler; concise, original)
-    const BLOG_POSTS = [
-      { id:1, title:"Ship Ugly First", date:"2025-08-10", excerpt:"The fastest path to feedback is a button that does something — even if it's ugly.", 
-       content:`<p>Imagine flying an x‑wing down a corridor, having to turn the plane sideways to fit, a missile on your tail and closing, hitting the turbo, feeling the g force, coming up on the end of the corridor, pulling back hard on the stick the second the corridor opens, turning 90 degrees and watching the missile continue straight. Tingles. Adrenaline. Release.</p>
-<p>Or if you don’t want sci‑fi, imagine winter circa 1645 in America. Several of your group almost dead from lack of food, tracking a deer, spotting it, shooting it with your bow, hitting but the deer is trying to run, fast twitch muscles charging and leaping, plunging a knife into its heart and knowing at that moment everyone is going to be okay. Heart rate calming laying on the warm deer.</p>
-<p>The modern world doesn’t have any real experiences like this any more. Survival has become a technocratic plod, making the right boring and careful decisions. There’s only fake experiences like the above, video games, sports, and drugs. And things like reckless driving, which are just kind of stupid.</p>
-<p>As we march toward ASI, this will only get worse. What the unabomber describes as Type 2 experiences, ones where you can achieve results with serious effort, will vanish. All that will be left are things you can have for no effort (like food) and things you can never have (like world peace).</p>
-<p>Even when humanity goes to Mars, we will be going as cargo.</p><h3>Rules</h3><ul><li>Reduce scope until it fits in a day.</li><li>Prefer reversible decisions.</li><li>Default to text over slides.</li></ul>`, 
-       tags:["execution","product","speed"] },
+    // === Blog (Dynamic) ===
+    let BLOG_POSTS = []; // Fetched from blog/index.json
 
-      { id:2, title:"Selling to Engineers (Without Lying)", date:"2025-08-05", excerpt:"Engineers are allergic to fluff. Here's what works.", 
+    async function initBlog() {
+      const list = $('#blog-list');
+      try {
+        const resp = await fetch('blog/index.json');
+        if (!resp.ok) throw new Error('Failed to load blog index');
+        BLOG_POSTS = await resp.json();
 
-content:`<p>Imagine you’re debugging a system at 3 a.m., logs streaming across your screen, your code patch failing for the third time, and suddenly you see it. The one line, the off by one, the missing semicolon. You fix it, rerun, the system stabilizes. Relief floods in. The world makes sense again because the math checks out, the cause is linked to the effect, reality is preserved.</p>
-<p>Or if you don’t want computers, imagine standing in a workshop in 1905 with an engine in pieces on the floor. You reassemble the gears, tighten the bolts, pour the fuel, and when it sputters to life you know it isn’t a trick. You earned it. The machine works because of the way atoms meet steel, not because someone told you a story.</p>
-<p>That is how engineers think. They live in a world where truth is testable, where bullshit doesn’t compile. So when you try to sell to them, the normal playbook of inflating the numbers, polishing the deck, or positioning the product fails. They can smell the lie instantly. They have been trained by reality itself, and reality doesn’t negotiate.</p>
-<p>The mistake most founders make is treating engineers like any other market. Engineers are allergic to hype. If you tell them your database is “10x faster,” they will benchmark it themselves. If you say your tool “never fails,” they will crash it within an hour. If you call your API “simple,” they will know in 30 seconds whether it is or isn’t. With engineers, words are weak currency. Proof is the only coin that spends.</p>
-<p>So how do you sell to engineers? You don’t sell, you show. You put the code on GitHub. You open your API docs. You let them try the demo without asking for their email. You let the product take the beating, because that is exactly what they are going to do anyway. And if your thing survives, they will respect it in a way no pitch ever could.</p>
-<pre><code>1) Job-to-be-done
-2) 60s demo
-3) One real metric</code></pre>
-<p>It is tempting to lie because lying feels like a shortcut. But with engineers, a shortcut is a dead end. The irony is that truth, shown clearly and plainly, is the fastest way through. If your product is good, it doesn’t need hype. And if it is not, no amount of storytelling will save it. Honesty is not just a moral stance here, it is a competitive advantage.</p>
-<p>The world already has too much noise. Engineers crave signal. Give them signal, raw and unembellished. Say what your product does, show how it works, let them verify. If it is real, they will use it and they will tell others. If it isn’t, no pitch will help you anyway.</p>
-<p>Selling to engineers without lying is not just possible, it is the only way that ever works. Because in the end, engineers don’t buy the story. They buy the truth.</p>`, tags:["gtm","sales","engineering"] },
+        // Render sorted by date descending
+        renderBlogList();
 
-      { id:3, title:"Monopsony", date:"2025-07-20", excerpt:"A 12-line script saved me two hours a week.", content:
-`<p>
-  <a href="https://en.wikipedia.org/wiki/Monopsony" target="_blank">Monopsony</a>:
-</p>
-<ul>
-  <li>One buyer rules the market — sellers dance to its tune.</li>
-  <li>Think of it as the mirror image of monopoly, but flipped around.</li>
-  <li>Classic example: a mining town with just one company hiring workers.</li>
-  <li>Good for the buyer’s wallet, bad for everyone else’s bargaining power.</li>
-  <li>It shows how power in markets isn’t only about selling — it’s also about buying.</li>
-</ul>`, tags:["automation","cli","focus"] },
-      { id:4, title:"My Ideas for productivity", date:"2025-07-12", excerpt:"If you can't point to a metric, it's a demo, not a pilot.", content:`<ul><li>Owner: one name</li><li>Timeline: &lt;4 weeks</li><li>Metric: tied to money or time</li><li>Kill switch: pre-agreed stop date</li></ul>`, tags:["pilot","metrics","process"] },
-      { id:5, title:"Readability > Cleverness", date:"2025-06-30", excerpt:"Future you is a stranger. Write for them.", content:`<p>Good names, short functions, boring tech. This site runs on HTML, CSS, and a pinch of JS.</p>`, tags:["craft","simplicity"] },
-    ];
+        // Handle deep link if waiting
+        if (window.location.hash.startsWith('#post-')) {
+          showBlogPost(window.location.hash.replace('#post-', ''));
+        }
+      } catch (err) {
+        console.error(err);
+        list.innerHTML = `<div class="muted">Failed to load blog posts.</div>`;
+      }
+    }
 
     // --- Helpers ---
-    const $ = (s, r=document) => r.querySelector(s);
-    const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+    const $ = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+    // Escape untrusted strings (from JSON) before inserting into HTML.
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
 
-    function setActiveNav(hash){
-      const page = (hash||"#about").replace('#','');
-      $$('.nav-link').forEach(a=>{
+    function setActiveNav(hash) {
+      const page = (hash || "#about").replace('#', '');
+      $$('.nav-link').forEach(a => {
         const on = a.getAttribute('href') === `#${page}`;
         a.classList.toggle('active', on);
-        if(on) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current');
+        if (on) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
       });
     }
-    function showPage(key){
-      $$('.page').forEach(p=>p.classList.remove('active'));
+    const PAGE_TITLES = {
+      about: SITE.name + ' — Portfolio',
+      projects: 'Projects — ' + SITE.name,
+      experience: 'Experience — ' + SITE.name,
+      infoperhour: 'Infoperhour — ' + SITE.name,
+      blog: 'Blog — ' + SITE.name,
+      contact: 'Contact — ' + SITE.name,
+    };
+    function showPage(key, title) {
+      document.title = title || PAGE_TITLES[key] || PAGE_TITLES.about;
+      $$('.page').forEach(p => p.classList.remove('active'));
       const el = document.getElementById(`${key}-page`);
-      if(el) el.classList.add('active');
-      setActiveNav(`#${key}`);
-      window.scrollTo({top:0, behavior:'smooth'});
+      if (el) el.classList.add('active');
+      setActiveNav(key === 'blog-post' ? '#blog' : `#${key}`);
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
     }
-    function handleHash(){
+    function handleHash() {
       const h = window.location.hash || '#about';
-      if(h.startsWith('#post-')){ showBlogPost(h.replace('#post-','')); return; }
-      const key = h.replace('#','');
-      const allowed = ['about','projects','experience','infoperhour','blog','contact'];
-      showPage(allowed.includes(key)?key:'about');
+      if (h.startsWith('#post-')) { showBlogPost(h.replace('#post-', '')); return; }
+      const key = h.replace('#', '');
+      if (key === 'top' || key === 'main-content') return; // in-page anchors, not routes
+      const allowed = ['about', 'projects', 'experience', 'infoperhour', 'blog', 'contact'];
+      showPage(allowed.includes(key) ? key : 'about');
       // Close mobile menu after navigation (added)
       const menu = document.getElementById('mobile-menu');
       const btn = document.getElementById('menu-toggle');
-      if(menu && btn && getComputedStyle(btn).display !== 'none'){
+      if (menu && btn && getComputedStyle(btn).display !== 'none') {
         menu.style.display = 'none';
-        btn.setAttribute('aria-expanded','false');
+        btn.setAttribute('aria-expanded', 'false');
       }
     }
 
     // --- Renderers ---
-    function renderMeta(){
-      document.title = `${SITE.name} — Portfolio`;
+    function renderMeta() {
       $('.brand').textContent = SITE.name;
       $('#gh').href = `https://github.com/${SITE.github}`;
       $('#gh').textContent = `@${SITE.github}`;
@@ -437,92 +1063,239 @@ content:`<p>Imagine you’re debugging a system at 3 a.m., logs streaming across
       $('#em2').textContent = SITE.email;
 
       // Mobile meta links
-      const ghm = $('#gh-mobile'); if(ghm){ ghm.href = `https://github.com/${SITE.github}`; ghm.textContent = `@${SITE.github}`; }
-      const lim = $('#li-mobile'); if(lim){ lim.href = `https://www.linkedin.com/in/${SITE.linkedin}/`; }
-      const emm = $('#em-mobile'); if(emm){ emm.href = `mailto:${SITE.email}`; emm.textContent = SITE.email; }
+      const ghm = $('#gh-mobile'); if (ghm) { ghm.href = `https://github.com/${SITE.github}`; ghm.textContent = `@${SITE.github}`; }
+      const lim = $('#li-mobile'); if (lim) { lim.href = `https://www.linkedin.com/in/${SITE.linkedin}/`; }
+      const emm = $('#em-mobile'); if (emm) { emm.href = `mailto:${SITE.email}`; emm.textContent = SITE.email; }
 
       const t = new Date();
-      const iso = t.toISOString().slice(0,10);
+      const iso = t.toISOString().slice(0, 10);
       const y = String(t.getFullYear());
-      const upd1 = $('#updated time'); if(upd1) upd1.textContent = iso;
-      const upd2 = $('#updated-mobile time'); if(upd2) upd2.textContent = iso;
-      const yr = $('#year'); if(yr) yr.textContent = y;
+      const upd1 = $('#updated time'); if (upd1) upd1.textContent = iso;
+      const upd2 = $('#updated-mobile time'); if (upd2) upd2.textContent = iso;
+      const yr = $('#year'); if (yr) yr.textContent = y;
     }
-    function renderProjects(){
-      const dl = $('#plist'); dl.innerHTML='';
-      PROJECTS.forEach(p=>{
+    function renderProjects() {
+      const dl = $('#plist'); dl.innerHTML = '';
+      PROJECTS.forEach(p => {
         const dt = document.createElement('dt');
-        dt.innerHTML = `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>${p.extra?` · <a href="${p.extraLink}" target="_blank" rel="noopener">${p.extra}</a>`:''}`;
+        dt.innerHTML = `<a href="${p.link}" target="_blank" rel="noopener">${p.title}</a>${p.extra ? ` · <a href="${p.extraLink}" target="_blank" rel="noopener">${p.extra}</a>` : ''}`;
         const dd = document.createElement('dd'); dd.textContent = p.desc;
-        dl.append(dt,dd);
+        dl.append(dt, dd);
       });
     }
-    function renderExperience(){
-      const ul = $('#exp'); ul.innerHTML='';
-      EXPERIENCE.forEach(j=>{
+    function renderExperience() {
+      const ul = $('#exp'); ul.innerHTML = '';
+      EXPERIENCE.forEach(j => {
         const li = document.createElement('li');
         li.textContent = `${j.role} — ${j.org} (${j.when})`;
         ul.appendChild(li);
       });
     }
-    function renderWebsites(){
-      const grid = $('#website-grid'); grid.innerHTML='';
-      WEBSITES.forEach(url=>{
-        try{
-          const u = new URL(url);
-          const name = u.hostname.replace(/^www\./,'');
-          const a = document.createElement('a');
-          a.href = url; a.target='_blank'; a.rel='noopener'; a.className='website-tile';
-          a.innerHTML = `<div class="website-name">${name}</div><div class="website-url">${u.href}</div>`;
-          grid.appendChild(a);
-        } catch(_) { /* skip invalid */ }
+    async function initInfoperhour() {
+      const grid = $('#website-grid');
+      const loader = $('#loading-state');
+
+      try {
+        const resp = await fetch('data/websites.json');
+        if (!resp.ok) throw new Error('Failed to load websites');
+        const data = await resp.json();
+
+        // Parse, precompute domain once, and sort (alphabetical).
+        WEBSITES = data.websites
+          .map(s => {
+            let domain = '';
+            try { domain = new URL(s.url).hostname; } catch (_) { /* invalid url */ }
+            return { ...s, domain };
+          })
+          .filter(s => s.domain) // drop invalid urls up front
+          .sort((a, b) => a.name.localeCompare(b.name));
+        FILTERED_SITES = [...WEBSITES];
+
+        // Extract categories
+        CATEGORIES = new Set(['All']);
+        WEBSITES.forEach(s => {
+          if (s.category) CATEGORIES.add(s.category);
+        });
+
+        renderCategoryFilters();
+        renderWebsites(WEBSITES);
+        setupSearch();
+
+        loader.style.display = 'none';
+        grid.style.display = 'grid';
+
+      } catch (err) {
+        console.error(err);
+        loader.innerHTML = `Failed to load resources.<br><span class="small muted">${err.message}</span>`;
+      }
+    }
+
+    function renderCategoryFilters() {
+      const container = $('#category-filters');
+      container.innerHTML = '';
+
+      const sortedCats = Array.from(CATEGORIES).sort();
+      // Ensure 'All' is first
+      if (sortedCats.includes('All')) {
+        sortedCats.splice(sortedCats.indexOf('All'), 1);
+        sortedCats.unshift('All');
+      }
+
+      sortedCats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = `category-btn ${cat === 'All' ? 'active' : ''}`;
+        btn.textContent = cat;
+        btn.onclick = () => filterByCategory(cat);
+        container.appendChild(btn);
       });
     }
-    function renderBlogList(){
+
+    function filterByCategory(cat) {
+      currentCategory = cat;
+      // Update UI
+      $$('.category-btn').forEach(b => b.classList.toggle('active', b.textContent === cat));
+
+      // Re-run filter logic (combining search + category)
+      handleFilter();
+    }
+
+    function setupSearch() {
+      const input = $('#site-search');
+      if (!input) return;
+
+      input.addEventListener('input', (e) => handleFilter(e.target.value));
+    }
+
+    function handleFilter(query = $('#site-search').value) {
+      const q = query.toLowerCase();
+
+      FILTERED_SITES = WEBSITES.filter(site => {
+        const matchesSearch = site.name.toLowerCase().includes(q) || site.url.toLowerCase().includes(q);
+        const matchesCat = currentCategory === 'All' || site.category === currentCategory;
+        return matchesSearch && matchesCat;
+      });
+
+      renderWebsites(FILTERED_SITES);
+    }
+
+    // Lazily swap data-src -> src as tiles approach the viewport, so we don't
+    // fire hundreds of favicon requests on load. Falls back to eager loading
+    // if IntersectionObserver is unavailable.
+    let faviconObserver = null;
+    if ('IntersectionObserver' in window) {
+      faviconObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const img = entry.target;
+          if (img.dataset.src) { img.src = img.dataset.src; img.removeAttribute('data-src'); }
+          obs.unobserve(img);
+        });
+      }, { rootMargin: '200px' });
+    }
+
+    function renderWebsites(list) {
+      const grid = $('#website-grid');
+      grid.innerHTML = '';
+
+      if (list.length === 0) {
+        grid.innerHTML = '<div style="grid-column:1/-1; text-align:center; color:var(--muted); padding:2rem;">No websites found matching your criteria.</div>';
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+      list.forEach(site => {
+        const domain = site.domain;
+        if (!domain) return;
+        const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+
+        const a = document.createElement('a');
+        a.href = site.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.className = 'website-tile';
+
+        const eager = !faviconObserver;
+        a.innerHTML = `
+          <img class="website-icon" ${eager ? 'src' : 'data-src'}="${faviconUrl}" alt="" loading="lazy" onerror="this.style.opacity=0">
+          ${site.category ? `<div class="website-category">${esc(site.category)}</div>` : ''}
+          <div class="website-name">${esc(site.name)}</div>
+          <div class="website-url">${esc(domain)}</div>
+        `;
+        if (faviconObserver) faviconObserver.observe(a.querySelector('img'));
+        frag.appendChild(a);
+      });
+      grid.appendChild(frag);
+    }
+    function renderBlogList() {
       const list = $('#blog-list');
-      const posts = [...BLOG_POSTS].sort((a,b)=>new Date(b.date)-new Date(a.date));
-      list.innerHTML = posts.map(p=>`
+      const posts = [...BLOG_POSTS].sort((a, b) => new Date(b.date) - new Date(a.date));
+      list.innerHTML = posts.map(p => `
         <div class="blog-post">
-          <h3><a href="#post-${p.id}">${p.title}</a></h3>
-          <div class="blog-meta"><time datetime="${p.date}">${new Date(p.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</time></div>
-          <div class="blog-excerpt">${p.excerpt}</div>
+          <h3><a href="#post-${p.id}">${esc(p.title)}</a></h3>
+          <div class="blog-meta"><time datetime="${esc(p.date)}">${new Date(p.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time></div>
+          <div class="blog-excerpt">${esc(p.excerpt)}</div>
           <a href="#post-${p.id}" class="read-more">Read more →</a>
-          <div class="blog-tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+          <div class="blog-tags">${(p.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
         </div>
       `).join('');
     }
-    function showBlogPost(id){
-      const post = BLOG_POSTS.find(p=>p.id===parseInt(id));
-      if(!post) return;
+    async function showBlogPost(id) {
+      const post = BLOG_POSTS.find(p => p.id === parseInt(id));
+      if (!post) return;
+
       const div = $('#blog-post-content');
-      div.innerHTML = `
-        <header>
-          <h1>${post.title}</h1>
-          <div class="blog-meta"><time datetime="${post.date}">${new Date(post.date).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}</time></div>
-        </header>
-        <div class="blog-content">${post.content}</div>
-        <div class="blog-tags">${post.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-      `;
-      showPage('blog-post');
+      // Show loading
+      div.innerHTML = `<div class="muted">Loading...</div>`;
+      showPage('blog-post', `${post.title} — ${SITE.name}`);
       window.location.hash = `#post-${post.id}`;
+
+      try {
+        const resp = await fetch(`blog/posts/${post.filename}`);
+        if (!resp.ok) throw new Error('Post not found');
+        const text = await resp.text();
+
+        // Strip YAML Frontmatter
+        // (everything between first two --- blocks)
+        const content = text.replace(/^---[\s\S]*?---/, '').trim();
+
+        div.innerHTML = `
+          <header>
+            <h1>${esc(post.title)}</h1>
+            <div class="blog-meta"><time datetime="${esc(post.date)}">${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time> · <a href="blog/${esc(post.filename)}">Permalink</a></div>
+          </header>
+          <div class="blog-content">${content}</div>
+          <div class="blog-tags">${(post.tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+        `;
+      } catch (err) {
+        div.innerHTML = `<div class="muted">Error loading post.</div>`;
+      }
     }
 
     // --- Init ---
-    document.addEventListener('DOMContentLoaded', ()=>{
-      renderMeta(); renderProjects(); renderExperience(); renderWebsites(); renderBlogList();
-      $$('.nav-link').forEach(a=>a.addEventListener('click', e=>{
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMeta(); renderProjects(); renderExperience(); // renderBlogList removed (called by init)
+      initInfoperhour(); // async fetch
+      initBlog(); // async fetch blog
+
+      $$('.nav-link').forEach(a => a.addEventListener('click', e => {
         const href = a.getAttribute('href');
-        if(href && href.startsWith('#')){ e.preventDefault(); window.location.hash = href; }
+        if (href && href.startsWith('#')) { e.preventDefault(); window.location.hash = href; }
       }));
+      const btt = document.getElementById('back-to-top');
+      if (btt) btt.addEventListener('click', e => {
+        e.preventDefault();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+      });
       window.addEventListener('hashchange', handleHash);
-      if(!window.location.hash) window.location.hash='#about';
+      if (!window.location.hash) window.location.hash = '#about';
       handleHash();
 
       // Mobile menu toggle (added)
       const toggle = document.getElementById('menu-toggle');
       const menu = document.getElementById('mobile-menu');
-      if(toggle && menu){
-        toggle.addEventListener('click', ()=>{
+      if (toggle && menu) {
+        toggle.addEventListener('click', () => {
           const isOpen = menu.style.display === 'block';
           menu.style.display = isOpen ? 'none' : 'block';
           toggle.setAttribute('aria-expanded', String(!isOpen));
@@ -531,4 +1304,5 @@ content:`<p>Imagine you’re debugging a system at 3 a.m., logs streaming across
     });
   </script>
 </body>
+
 </html>

@@ -1,0 +1,10 @@
+{
+  "name": "saptarshisama.github.io",
+  "version": "1.0.0",
+  "description": "Personal portfolio",
+  "scripts": {
+    "build": "node scripts/build_blog.js"
+  },
+  "author": "Saptarshi Samanta",
+  "license": "MIT"
+}

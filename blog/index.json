@@ -1,0 +1,61 @@
+[
+  {
+    "filename": "ship-ugly-first.html",
+    "id": 1,
+    "title": "Ship Ugly First",
+    "date": "2025-08-10",
+    "tags": [
+      "execution",
+      "product",
+      "speed"
+    ],
+    "excerpt": "The fastest path to feedback is a button that does something — even if it's ugly."
+  },
+  {
+    "filename": "selling-to-engineers.html",
+    "id": 2,
+    "title": "Selling to Engineers (Without Lying)",
+    "date": "2025-08-05",
+    "tags": [
+      "gtm",
+      "sales",
+      "engineering"
+    ],
+    "excerpt": "Engineers are allergic to fluff. Here's what works."
+  },
+  {
+    "filename": "monopsony.html",
+    "id": 3,
+    "title": "Monopsony",
+    "date": "2025-07-20",
+    "tags": [
+      "automation",
+      "cli",
+      "focus"
+    ],
+    "excerpt": "A 12-line script saved me two hours a week."
+  },
+  {
+    "filename": "productivity-ideas.html",
+    "id": 4,
+    "title": "My Ideas for productivity",
+    "date": "2025-07-12",
+    "tags": [
+      "pilot",
+      "metrics",
+      "process"
+    ],
+    "excerpt": "If you can't point to a metric, it's a demo, not a pilot."
+  },
+  {
+    "filename": "readability-cleverness.html",
+    "id": 5,
+    "title": "Readability > Cleverness",
+    "date": "2025-06-30",
+    "tags": [
+      "craft",
+      "simplicity"
+    ],
+    "excerpt": "Future you is a stranger. Write for them."
+  }
+]
